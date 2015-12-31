@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane style="-fx-background-color: #3d3d3d;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Game">
+   <center>
+      <StackPane fx:id="layers">
+         <children>
+            <Canvas fx:id="frame" height="600.0" width="900.0" />
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
