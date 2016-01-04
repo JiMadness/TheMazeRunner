@@ -38,7 +38,7 @@ public class WelcomeStage extends AnimationTimer implements GameStage {
 
     public void stop() {
         stopSound();
-        Game.getInstance().getLayers().getChildren().remove(1,Game.getInstance().getLayers().getChildren().size()-1);
+        Game.getInstance().getLayers().getChildren().clear();
         super.stop();
     }
 }

@@ -20,7 +20,6 @@ public class Main extends Application {
         mainScene = new Scene(root,900,600);
         primaryStage.setTitle("The Maze Runner");
         primaryStage.setScene(mainScene);
-        primaryStage.setFullScreen(true);
         primaryStage.show();
         Game.getInstance().initControls();
     }

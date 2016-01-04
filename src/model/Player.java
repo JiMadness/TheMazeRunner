@@ -1,5 +1,6 @@
 package model;
 
+import controller.Game;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
@@ -24,6 +25,7 @@ public class Player {
     private double refreshTime = 100;
     private int score=0;
     private int ammo=10;
+    private boolean walkable=true;
     public static Player getInstance() {
         return instance;
     }
@@ -71,6 +73,8 @@ public class Player {
         rightSprite = new Sprite(rights, getPosX(), getPosY(), getRefreshTime());
     }
     public void moveUp(){
+        if(getPosY()<2)
+            return;
         downSprite.hide();
         leftSprite.hide();
         rightSprite.hide();
@@ -79,6 +83,8 @@ public class Player {
         movingDirection = Moving.UP;
     }
     public void moveDown(){
+        if(getPosY()> Game.getInstance().getLayers().getHeight()-100)
+            return;
         upSprite.hide();
         leftSprite.hide();
         rightSprite.hide();
@@ -87,6 +93,8 @@ public class Player {
         movingDirection = Moving.DOWN;
     }
     public void moveLeft(){
+        if(getPosX()<2)
+            return;
         upSprite.hide();
         downSprite.hide();
         rightSprite.hide();
@@ -95,6 +103,8 @@ public class Player {
         movingDirection = Moving.LEFT;
     }
     public void moveRight(){
+        if(getPosX()>Game.getInstance().getLayers().getWidth()-70)
+            return;
         upSprite.hide();
         downSprite.hide();
         leftSprite.hide();
@@ -159,5 +169,12 @@ public class Player {
 
     public void setAmmo(int ammo) {
         this.ammo = ammo;
+    }
+
+    public boolean isWalkable() {
+        return walkable;
+    }
+    public void setWalkable(boolean walkable) {
+        this.walkable = walkable;
     }
 }

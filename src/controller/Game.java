@@ -32,6 +32,8 @@ public class Game {
                 Player.getInstance().moveRight();
             if (e.getCode().equals(KeyCode.SPACE))
                 Player.getInstance().shoot();
+            if(e.getCode().equals(KeyCode.BACK_SPACE))
+                System.out.println(Player.getInstance().getPosX()+" "+Player.getInstance().getPosY()+" "+frame.getWidth()+" "+frame.getHeight());
         });
     }
     public static Game getInstance(){return instance;}
