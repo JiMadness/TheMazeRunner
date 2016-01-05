@@ -2,9 +2,13 @@ package model;
 
 import controller.Game;
 import javafx.animation.AnimationTimer;
+import javafx.scene.media.AudioClip;
+
+import java.io.File;
 
 public class GameLoop extends AnimationTimer{
     private static GameLoop instance = new GameLoop();
+    private AudioClip gameTrack = new AudioClip(new File("resources/sounds/start.mp3").toURI().toString());
 
     public static GameLoop getInstance() {
         return instance;
@@ -14,6 +18,8 @@ public class GameLoop extends AnimationTimer{
     @Override
     public void handle(long now) {
         Game.getInstance().makePlayerMovement();
+        if(!gameTrack.isPlaying())
+            gameTrack.play();
     }
 
 }
