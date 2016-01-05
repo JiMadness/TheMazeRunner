@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Player {
+
     public enum Moving{UP,DOWN,LEFT,RIGHT}
     private static Player instance = new Player();
 
@@ -17,7 +18,7 @@ public class Player {
     private Sprite leftSprite;
     private Sprite rightSprite;
 
-    public static Moving movingDirection;
+    private static Moving movingDirection;
     private AudioClip shootingSound = new AudioClip(new File("resources/sounds/shoot.wav").toURI().toString());
     private AudioClip noAmmo = new AudioClip(new File("resources/sounds/noAmmo.wav").toURI().toString());
     private double posX=300;
@@ -75,49 +76,77 @@ public class Player {
     public void moveUp(){
         if(getPosY()<2)
             return;
-        downSprite.hide();
-        leftSprite.hide();
-        rightSprite.hide();
+        getDownSprite().hide();
+        getLeftSprite().hide();
+        getRightSprite().hide();
         setPosY(getPosY() - 2);
-        upSprite.show();
+        getUpSprite().show();
         movingDirection = Moving.UP;
     }
     public void moveDown(){
         if(getPosY()> Game.getInstance().getLayers().getHeight()-100)
             return;
-        upSprite.hide();
-        leftSprite.hide();
-        rightSprite.hide();
+        getUpSprite().hide();
+        getLeftSprite().hide();
+        getRightSprite().hide();
         setPosY(getPosY() + 2);
-        downSprite.show();
+        getDownSprite().show();
         movingDirection = Moving.DOWN;
     }
     public void moveLeft(){
         if(getPosX()<2)
             return;
-        upSprite.hide();
-        downSprite.hide();
-        rightSprite.hide();
+        getUpSprite().hide();
+        getDownSprite().hide();
+        getRightSprite().hide();
         setPosX(getPosX() - 2);
-        leftSprite.show();
+        getLeftSprite().show();
         movingDirection = Moving.LEFT;
     }
     public void moveRight(){
         if(getPosX()>Game.getInstance().getLayers().getWidth()-70)
             return;
-        upSprite.hide();
-        downSprite.hide();
-        leftSprite.hide();
+        getUpSprite().hide();
+        getDownSprite().hide();
+        getLeftSprite().hide();
         setPosX(getPosX() + 2);
-        rightSprite.show();
+        getRightSprite().show();
         movingDirection = Moving.RIGHT;
     }
     public void shoot(){
         if(getAmmo()>0){
             shootingSound.play();
             setAmmo(getAmmo()-1);
+            Decorations.getInstance().updateDecorations();
         }
         else noAmmo.play();
+    }
+    public Sprite getUpSprite() {
+        return upSprite;
+    }
+
+    public Sprite getDownSprite() {
+        return downSprite;
+    }
+
+    public Sprite getLeftSprite() {
+        return leftSprite;
+    }
+
+    public Sprite getRightSprite() {
+        return rightSprite;
+    }
+    public boolean isMovingUp(){
+        return movingDirection == Moving.UP;
+    }
+    public boolean isMovingDown(){
+        return movingDirection == Moving.DOWN;
+    }
+    public boolean isMovingLeft(){
+        return movingDirection == Moving.LEFT;
+    }
+    public boolean isMovingRight(){
+        return movingDirection == Moving.RIGHT;
     }
     public double getPosX() {
         return posX;
@@ -133,26 +162,26 @@ public class Player {
 
     public void setPosX(double posX) {
         this.posX = posX;
-        upSprite.updatePosition(posX,posY);
-        downSprite.updatePosition(posX,posY);
-        leftSprite.updatePosition(posX,posY);
-        rightSprite.updatePosition(posX,posY);
+        getUpSprite().updatePosition(posX, posY);
+        getDownSprite().updatePosition(posX, posY);
+        getLeftSprite().updatePosition(posX, posY);
+        getRightSprite().updatePosition(posX, posY);
     }
 
     public void setPosY(double posY) {
         this.posY = posY;
-        upSprite.updatePosition(posX,posY);
-        downSprite.updatePosition(posX,posY);
-        leftSprite.updatePosition(posX,posY);
-        rightSprite.updatePosition(posX,posY);
+        getUpSprite().updatePosition(posX, posY);
+        getDownSprite().updatePosition(posX, posY);
+        getLeftSprite().updatePosition(posX, posY);
+        getRightSprite().updatePosition(posX, posY);
     }
 
     public void setRefreshTime(double refreshTime) {
         this.refreshTime = refreshTime;
-        upSprite.setRefreshTime(refreshTime);
-        downSprite.setRefreshTime(refreshTime);
-        leftSprite.setRefreshTime(refreshTime);
-        rightSprite.setRefreshTime(refreshTime);
+        getUpSprite().setRefreshTime(refreshTime);
+        getDownSprite().setRefreshTime(refreshTime);
+        getLeftSprite().setRefreshTime(refreshTime);
+        getRightSprite().setRefreshTime(refreshTime);
     }
 
     public int getScore() {

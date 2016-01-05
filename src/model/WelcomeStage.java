@@ -19,7 +19,8 @@ public class WelcomeStage extends AnimationTimer implements GameStage {
     }
     @Override
     public void handle(long now) {
-        //Here comes the loop of the welcome stage.
+        if (!startTrack.isPlaying())
+            startTrack.play();
     }
     private void drawGraphics(){
         Game.getInstance().getFrame().getGraphicsContext2D().drawImage(new Image("backgrounds/background.jpg"), 0, 0, Game.getInstance().getFrame().getWidth(), Game.getInstance().getFrame().getHeight());
@@ -38,7 +39,7 @@ public class WelcomeStage extends AnimationTimer implements GameStage {
 
     public void stop() {
         stopSound();
-        Game.getInstance().getLayers().getChildren().clear();
+        Game.getInstance().getFrame().getGraphicsContext2D().clearRect(0,0,Game.getInstance().getFrame().getWidth(),Game.getInstance().getFrame().getHeight());
         super.stop();
     }
 }

@@ -8,7 +8,7 @@ import main.Main;
 import model.*;
 
 
-public class Game {
+public class Game{
     private static Game instance;
     @FXML
     private Canvas frame;
@@ -18,6 +18,8 @@ public class Game {
     @FXML
     private void initialize(){
         instance= this;
+        GameLoop.getInstance().start();
+        Decorations.getInstance().updateDecorations();
         WelcomeStage.getInstance().start();
     }
     public void initControls(){
@@ -32,10 +34,19 @@ public class Game {
                 Player.getInstance().moveRight();
             if (e.getCode().equals(KeyCode.SPACE))
                 Player.getInstance().shoot();
-            if(e.getCode().equals(KeyCode.BACK_SPACE))
-                System.out.println(Player.getInstance().getPosX()+" "+Player.getInstance().getPosY()+" "+frame.getWidth()+" "+frame.getHeight());
         });
     }
+    public void makePlayerMovement(){
+        if(Player.getInstance().isMovingUp())
+            Player.getInstance().getUpSprite().stop();
+        else if(Player.getInstance().isMovingDown())
+            Player.getInstance().getDownSprite().stop();
+        else if(Player.getInstance().isMovingLeft())
+            Player.getInstance().getLeftSprite().stop();
+        else if(Player.getInstance().isMovingRight())
+            Player.getInstance().getRightSprite().stop();
+    }
+
     public static Game getInstance(){return instance;}
     public Canvas getFrame(){return frame;}
     public StackPane getLayers(){return layers;}
