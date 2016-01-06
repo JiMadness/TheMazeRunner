@@ -14,13 +14,13 @@ public class Game{
     private Canvas frame;
     @FXML
     private StackPane layers;
-
+    private Maze testMaze = new Maze(WelcomeStage.getInstance());
     @FXML
     private void initialize(){
         instance= this;
         GameLoop.getInstance().start();
         Decorations.getInstance().updateDecorations();
-        WelcomeStage.getInstance().start();
+        testMaze.getMazeTree().getRoot().getData().start();
     }
     public void initControls(){
         Main.getInstance().getMainScene().setOnKeyPressed(e -> {

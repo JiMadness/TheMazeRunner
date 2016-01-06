@@ -21,5 +21,4 @@ public class GameLoop extends AnimationTimer{
         if(!gameTrack.isPlaying())
             gameTrack.play();
     }
-
 }
