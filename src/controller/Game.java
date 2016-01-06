@@ -14,7 +14,7 @@ public class Game{
     private Canvas frame;
     @FXML
     private StackPane layers;
-    private Maze testMaze = new Maze(WelcomeStage.getInstance());
+    private Maze testMaze = new Maze(TestStage.getInstance());
     @FXML
     private void initialize(){
         instance= this;
