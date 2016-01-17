@@ -37,13 +37,13 @@ public class Game{
         });
     }
     public void makePlayerMovement(){
-        if(Player.getInstance().isMovingUp())
+        if(Player.getInstance().isLookingUp())
             Player.getInstance().getUpSprite().stop();
-        else if(Player.getInstance().isMovingDown())
+        else if(Player.getInstance().isLookingDown())
             Player.getInstance().getDownSprite().stop();
-        else if(Player.getInstance().isMovingLeft())
+        else if(Player.getInstance().isLookingLeft())
             Player.getInstance().getLeftSprite().stop();
-        else if(Player.getInstance().isMovingRight())
+        else if(Player.getInstance().isLookingRight())
             Player.getInstance().getRightSprite().stop();
     }
 

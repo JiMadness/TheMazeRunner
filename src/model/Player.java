@@ -136,16 +136,16 @@ public class Player {
     public Sprite getRightSprite() {
         return rightSprite;
     }
-    public boolean isMovingUp(){
+    public boolean isLookingUp(){
         return movingDirection == Moving.UP;
     }
-    public boolean isMovingDown(){
+    public boolean isLookingDown(){
         return movingDirection == Moving.DOWN;
     }
-    public boolean isMovingLeft(){
+    public boolean isLookingLeft(){
         return movingDirection == Moving.LEFT;
     }
-    public boolean isMovingRight(){
+    public boolean isLookingRight(){
         return movingDirection == Moving.RIGHT;
     }
     public double getPosX() {
