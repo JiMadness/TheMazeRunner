@@ -21,8 +21,8 @@ public class Player {
     private static Moving movingDirection;
     private AudioClip shootingSound = new AudioClip(new File("resources/sounds/shoot.wav").toURI().toString());
     private AudioClip noAmmo = new AudioClip(new File("resources/sounds/noAmmo.wav").toURI().toString());
-    private double posX=300;
-    private double posY=300;
+    private double posX=Maze.getXPath();
+    private double posY=Maze.getYPath();
     private double refreshTime = 100;
     private int score=0;
     private int ammo=10;
@@ -74,44 +74,52 @@ public class Player {
         rightSprite = new Sprite(rights, getPosX(), getPosY(), getRefreshTime());
     }
     public void moveUp(){
-        if(getPosY()<2)
+        if(getPosY()<Maze.getMaxY())
             return;
-        getDownSprite().hide();
-        getLeftSprite().hide();
-        getRightSprite().hide();
-        setPosY(getPosY() - 2);
-        getUpSprite().show();
-        movingDirection = Moving.UP;
+        if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
+            getDownSprite().hide();
+            getLeftSprite().hide();
+            getRightSprite().hide();
+            setPosY(getPosY() - 2);
+            getUpSprite().show();
+            movingDirection = Moving.UP;
+        }
     }
     public void moveDown(){
-        if(getPosY()> Game.getInstance().getLayers().getHeight()-100)
+        if(getPosY()>Maze.getMinY())
             return;
-        getUpSprite().hide();
-        getLeftSprite().hide();
-        getRightSprite().hide();
-        setPosY(getPosY() + 2);
-        getDownSprite().show();
-        movingDirection = Moving.DOWN;
+        if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
+            getUpSprite().hide();
+            getLeftSprite().hide();
+            getRightSprite().hide();
+            setPosY(getPosY() + 2);
+            getDownSprite().show();
+            movingDirection = Moving.DOWN;
+        }
     }
     public void moveLeft(){
-        if(getPosX()<2)
+        if(getPosX()<Maze.getMinX())
             return;
-        getUpSprite().hide();
-        getDownSprite().hide();
-        getRightSprite().hide();
-        setPosX(getPosX() - 2);
-        getLeftSprite().show();
-        movingDirection = Moving.LEFT;
+        if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
+            getUpSprite().hide();
+            getDownSprite().hide();
+            getRightSprite().hide();
+            setPosX(getPosX() - 2);
+            getLeftSprite().show();
+            movingDirection = Moving.LEFT;
+        }
     }
     public void moveRight(){
-        if(getPosX()>Game.getInstance().getLayers().getWidth()-70)
+        if(getPosX()>Maze.getMaxX())
             return;
-        getUpSprite().hide();
-        getDownSprite().hide();
-        getLeftSprite().hide();
-        setPosX(getPosX() + 2);
-        getRightSprite().show();
-        movingDirection = Moving.RIGHT;
+        if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
+            getUpSprite().hide();
+            getDownSprite().hide();
+            getLeftSprite().hide();
+            setPosX(getPosX() + 2);
+            getRightSprite().show();
+            movingDirection = Moving.RIGHT;
+        }
     }
     public void shoot(){
         if(getAmmo()>0){

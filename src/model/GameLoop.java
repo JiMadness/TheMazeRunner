@@ -20,5 +20,6 @@ public class GameLoop extends AnimationTimer{
         Game.getInstance().makePlayerMovement();
         if(!gameTrack.isPlaying())
             gameTrack.play();
+        Decorations.getInstance().updateDecorations();
     }
 }

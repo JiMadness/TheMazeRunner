@@ -20,7 +20,8 @@ public class Decorations {
     }
     public void updateDecorations(){
         decorationsCanvas.getGraphicsContext2D().clearRect(0,0,Game.getInstance().getFrame().getWidth(),Game.getInstance().getFrame().getHeight());
-        decorationsCanvas.getGraphicsContext2D().fillText("Score: "+Player.getInstance().getScore(),10,20);
+        decorationsCanvas.getGraphicsContext2D().fillText("Score: " + Player.getInstance().getScore(), 10, 20);
         decorationsCanvas.getGraphicsContext2D().fillText("Ammo: "+Player.getInstance().getAmmo(),10,40);
+        decorationsCanvas.getGraphicsContext2D().fillText("X: "+Player.getInstance().getPosX()+"\nY: "+Player.getInstance().getPosY(),10,60);
     }
 }
