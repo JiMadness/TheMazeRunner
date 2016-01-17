@@ -19,6 +19,7 @@ public class GameLoop extends AnimationTimer{
     @Override
     public void handle(long now) {
         Game.getInstance().makePlayerMovement();
+        Game.getInstance().makeMonsterMovement();
         if(!gameTrack.isPlaying())
             gameTrack.play();
         Decorations.getInstance().updateDecorations();

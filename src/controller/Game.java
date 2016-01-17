@@ -51,4 +51,9 @@ public class Game{
     public static Game getInstance(){return instance;}
     public Canvas getFrame(){return frame;}
     public StackPane getLayers(){return layers;}
+
+
+    public void makeMonsterMovement() {
+        Monster.getInstance().moveUp();
+    }
 }
