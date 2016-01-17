@@ -4,7 +4,8 @@ import datastructures.Node;
 import datastructures.Tree;
 
 public class Maze {
-    private Tree<GameStage> mazeTree = new Tree<>();
+    private static Tree<GameStage> mazeTree = new Tree<>();
+    private static Node<GameStage> currentNode;
     private static int XPath =425;
     private static int YPath =425;
     private static int delta=25;
@@ -13,9 +14,9 @@ public class Maze {
     private static int maxX;
     private static int maxY;
     public Maze(GameStage root){
-        getMazeTree().setRoot(new Node<>(root));
+        setCurrentNode(new Node<>(root));
+        getMazeTree().setRoot(getCurrentNode());
     }
-
     public static int getMinX() {
         return minX;
     }
@@ -58,5 +59,13 @@ public class Maze {
     }
     public static int getDelta() {
         return delta;
+    }
+
+    public static Node<GameStage> getCurrentNode() {
+        return currentNode;
+    }
+
+    public static void setCurrentNode(Node<GameStage> currentNode) {
+        Maze.currentNode = currentNode;
     }
 }

@@ -22,7 +22,6 @@ public class Node<T> {
     }
 
     public void setParent(Node<T> parent) {
-        parent.addChild(this);
         this.parent = parent;
     }
 
@@ -36,7 +35,9 @@ public class Node<T> {
         child.setParent(this);
         this.children.add(child);
     }
-
+    public Node<T>getParent(){
+        return parent;
+    }
     public T getData() {
         return this.data;
     }
