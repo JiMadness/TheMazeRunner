@@ -19,6 +19,12 @@ public class RightPathStage implements GameStage{
     public int getID() {
         return ID;
     }
+
+    @Override
+    public StageType getStageType() {
+        return StageType.RIGHTPATH;
+    }
+
     public void setID(int ID) {
         this.ID=ID;
     }

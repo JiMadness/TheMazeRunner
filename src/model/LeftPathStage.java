@@ -19,7 +19,14 @@ public class LeftPathStage implements GameStage{
     public int getID() {
         return ID;
     }
+
+    @Override
+    public StageType getStageType() {
+        return StageType.LEFTPATH;
+    }
+
     public void setID(int ID) {
         this.ID=ID;
     }
+
 }

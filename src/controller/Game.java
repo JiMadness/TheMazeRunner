@@ -54,6 +54,6 @@ public class Game{
 
 
     public void makeMonsterMovement() {
-        Monster.getInstance().moveUp();
+       // Monster.getInstance().moveUp();
     }
 }

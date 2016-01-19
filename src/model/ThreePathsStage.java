@@ -19,6 +19,12 @@ public class ThreePathsStage implements GameStage {
     public int getID() {
         return ID;
     }
+
+    @Override
+    public StageType getStageType() {
+        return StageType.THREEPATHS;
+    }
+
     public void setID(int ID) {
         this.ID=ID;
     }

@@ -3,7 +3,6 @@ package model;
 import controller.Game;
 import javafx.animation.AnimationTimer;
 import javafx.scene.media.AudioClip;
-import main.Main;
 
 import java.io.File;
 
@@ -20,22 +19,24 @@ public class GameLoop extends AnimationTimer{
     public void handle(long now) {
         Game.getInstance().makePlayerMovement();
         Game.getInstance().makeMonsterMovement();
-        if(!gameTrack.isPlaying())
+        if (!gameTrack.isPlaying())
             gameTrack.play();
         Decorations.getInstance().updateDecorations();
-        if(Player.getInstance().getPosX()>=Maze.getMaxX()){
-            Maze.getCurrentNode().getData().stop();
-            Maze.setCurrentNode(Maze.getCurrentNode().getChildren().get(0));
-            Maze.getCurrentNode().getData().start();
-            Player.getInstance().setPosX(Maze.getMinX());
-            Player.getInstance().setPosY(Maze.getYPath());
-        }
-        else if(Player.getInstance().getPosX()<=Maze.getMinX()){
-            Maze.getCurrentNode().getData().stop();
-            Maze.setCurrentNode(Maze.getCurrentNode().getParent());
-            Maze.getCurrentNode().getData().start();
-            Player.getInstance().setPosX(Maze.getMaxX());
-            Player.getInstance().setPosY(Maze.getYPath());
+        switch (Maze.getCurrentNode().getData().getStageType()){
+            case THREEPATHS:
+                if(Player.getInstance().getPosX()<=Maze.getMinX()&&Maze.getCurrentNode().getParent()!=null){
+                    Maze.getCurrentNode().getData().stop();
+                    Maze.setCurrentNode(Maze.getCurrentNode().getParent());
+                    Maze.getCurrentNode().getData().start();
+                }
+                //do same for the other 3 possibilities
+                break;
+            case LEFTPATH:
+                //do same as THREEPATHS
+                break;
+            case RIGHTPATH:
+                //do same as THREEPATHS
+                break;
         }
     }
 }

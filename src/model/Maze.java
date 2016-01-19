@@ -3,12 +3,10 @@ package model;
 import datastructures.Node;
 import datastructures.Tree;
 
+
 public class Maze {
     private static Tree<GameStage> mazeTree = new Tree<>();
     private static Node<GameStage> currentNode;
-    private static int XPath =425;
-    private static int YPath =425;
-    private static int delta=25;
     private static int minX;
     private static int minY;
     private static int maxX;
@@ -52,13 +50,13 @@ public class Maze {
         return mazeTree;
     }
     public static int getXPath() {
-        return XPath;
+        return 425;
     }
     public static int getYPath() {
-        return YPath;
+        return 425;
     }
     public static int getDelta() {
-        return delta;
+        return 25;
     }
 
     public static Node<GameStage> getCurrentNode() {

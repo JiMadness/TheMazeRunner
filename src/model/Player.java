@@ -1,6 +1,5 @@
 package model;
 
-import controller.Game;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
@@ -26,7 +25,6 @@ public class Player {
     private double refreshTime = 100;
     private int score=0;
     private int ammo=10;
-    private boolean walkable=true;
     public static Player getInstance() {
         return instance;
     }
@@ -206,12 +204,5 @@ public class Player {
 
     public void setAmmo(int ammo) {
         this.ammo = ammo;
-    }
-
-    public boolean isWalkable() {
-        return walkable;
-    }
-    public void setWalkable(boolean walkable) {
-        this.walkable = walkable;
     }
 }
