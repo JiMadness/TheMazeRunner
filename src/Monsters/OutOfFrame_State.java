@@ -30,7 +30,7 @@ public class OutOfFrame_State implements MonsterState{
 
     @Override
     public void switchFrame() {
-
+        this.monster.state = this.monster.inFrame_State;
     }
 
     @Override
@@ -39,12 +39,12 @@ public class OutOfFrame_State implements MonsterState{
     }
 
     @Override
-    public void Revive() {
-
+    public void Revive() {this.monster.resetLives();
+        this.monster.state = this.monster.outOfFrame_State;
     }
 
     @Override
-    public void Die() {
+    public void lifeloss() {
 
     }
 

@@ -25,7 +25,10 @@ public class Dead_State implements MonsterState{
 
     @Override
     public void MakeDecision() {
-
+        this.monster.getMonsterSprite().hide();
+        this.monster.setPosX(0);
+        this.monster.setPosY(0);
+        this.monster.state = this.monster.dead_State;
     }
 
     @Override
@@ -40,12 +43,12 @@ public class Dead_State implements MonsterState{
 
     @Override
     public void Revive() {
-
+        this.monster.resetLives();
+        this.monster.state = this.monster.outOfFrame_State;
     }
 
     @Override
-    public void Die() {
-
+    public void lifeloss() {
     }
 
     @Override
