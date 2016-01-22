@@ -6,12 +6,13 @@ import javafx.scene.image.Image;
 public class RightPathStage implements GameStage{
     private int ID=0;
     private Path parentCameFrom;
+    private static Image stageImage = new Image("design/RightPath.jpg");
     public void start(){
         Maze.setMinX(0);
         Maze.setMinY(502);
         Maze.setMaxX(450);
         Maze.setMaxY(108);
-        Game.getInstance().getFrame().getGraphicsContext2D().drawImage(new Image("design/RightPath.jpg"), 0, 0, Game.getInstance().getFrame().getWidth(), Game.getInstance().getFrame().getHeight());
+        Game.getInstance().getFrame().getGraphicsContext2D().drawImage(stageImage, 0, 0, Game.getInstance().getFrame().getWidth(), Game.getInstance().getFrame().getHeight());
         Maze.getCurrentNode().initialize();
     }
     public RightPathStage(Path parentCameFrom){
