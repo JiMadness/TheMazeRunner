@@ -1,6 +1,8 @@
 package datastructures;
 
-public class Tree<T>{
+import model.GameStage;
+
+public class Tree<T extends GameStage>{
     private Node<T> root;
     public Tree(){
         this.setRoot(null);

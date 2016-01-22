@@ -14,7 +14,7 @@ public class Game{
     private Canvas frame;
     @FXML
     private StackPane layers;
-    public Maze testMaze = new Maze(new ThreePathsStage());
+    public Maze testMaze = new Maze(new ThreePathsStage(Path.NULL));
     @FXML
     private void initialize(){
         instance= this;
@@ -22,16 +22,10 @@ public class Game{
         testMaze.getMazeTree().getRoot().getData().start();
         Decorations.getInstance().updateDecorations();
 
-        testMaze.getMazeTree().getRoot().addChild(new RightPathStage());
-        testMaze.getMazeTree().getRoot().addChild(new LeftPathStage());
-        testMaze.getMazeTree().getRoot().addChild(new ThreePathsStage());
-        testMaze.getMazeTree().getRoot().getChildren().get(0).addChild(new RightPathStage());
-        testMaze.getMazeTree().getRoot().getChildren().get(0).addChild(new LeftPathStage());
-        testMaze.getMazeTree().getRoot().getChildren().get(0).addChild(new ThreePathsStage());
-
-        testMaze.getMazeTree().getRoot().getChildren().get(1).addChild(new ThreePathsStage());
-        testMaze.getMazeTree().getRoot().getChildren().get(2).addChild(new LeftPathStage());
-
+        testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.RIGHT),Path.RIGHT.ordinal());
+        testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.LEFT),Path.LEFT.ordinal());
+        testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.UP),Path.UP.ordinal());
+        testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.DOWN),Path.DOWN.ordinal());
     }
     public void initControls(){
         Main.getInstance().getMainScene().setOnKeyPressed(e -> {
@@ -62,8 +56,4 @@ public class Game{
     public Canvas getFrame(){return frame;}
     public StackPane getLayers(){return layers;}
 
-
-    public void makeMonsterMovement() {
-       // Monster.getInstance().moveUp();
-    }
 }
