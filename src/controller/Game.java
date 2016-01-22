@@ -25,8 +25,10 @@ public class Game{
         testMaze.getMazeTree().getRoot().addChild(new RightPathStage());
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage());
         testMaze.getMazeTree().getRoot().addChild(new ThreePathsStage());
-        testMaze.getMazeTree().getRoot().getChildren().get(0).addChild(new ThreePathsStage());
+        testMaze.getMazeTree().getRoot().getChildren().get(0).addChild(new RightPathStage());
         testMaze.getMazeTree().getRoot().getChildren().get(0).addChild(new LeftPathStage());
+        testMaze.getMazeTree().getRoot().getChildren().get(0).addChild(new ThreePathsStage());
+
         testMaze.getMazeTree().getRoot().getChildren().get(1).addChild(new ThreePathsStage());
         testMaze.getMazeTree().getRoot().getChildren().get(2).addChild(new LeftPathStage());
 
