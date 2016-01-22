@@ -11,6 +11,6 @@ public interface MonsterState {
     public void switchFrame();
     public void collide();
     public void Revive();
-    public void Die();
+    public void lifeloss();
     public void killPlayer();
 }
