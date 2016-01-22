@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.media.AudioClip;
 
 import java.io.File;
+import java.io.SyncFailedException;
 
 public class GameLoop extends AnimationTimer{
     private static GameLoop instance = new GameLoop();
@@ -18,13 +19,28 @@ public class GameLoop extends AnimationTimer{
     @Override
     public void handle(long now) {
         Game.getInstance().makePlayerMovement();
-        Game.getInstance().makeMonsterMovement();
+        //Game.getInstance().makeMonsterMovement();
         if (!gameTrack.isPlaying())
             gameTrack.play();
         Decorations.getInstance().updateDecorations();
+
         switch (Maze.getCurrentNode().getData().getStageType()){
             case THREEPATHS:
                 if(Player.getInstance().getPosX()<=Maze.getMinX()&&Maze.getCurrentNode().getParent()!=null){
+                    Maze.getCurrentNode().getData().stop();
+
+                    Maze.setCurrentNode(Maze.getCurrentNode().getChildren().get(1));
+                    System.out.print("hellooo");
+
+                    Maze.getCurrentNode().getData().start();
+
+                }
+               else if(Player.getInstance().getPosX()>=Maze.getMaxX()&&Maze.getCurrentNode().getParent()!=null){
+                    Maze.getCurrentNode().getData().stop();
+                    Maze.setCurrentNode(Maze.getCurrentNode().getParent());
+                    Maze.getCurrentNode().getData().start();
+                }
+                else if(Player.getInstance().getPosY()<=Maze.getMinY()&&Maze.getCurrentNode().getParent()!=null){
                     Maze.getCurrentNode().getData().stop();
                     Maze.setCurrentNode(Maze.getCurrentNode().getParent());
                     Maze.getCurrentNode().getData().start();
@@ -32,11 +48,33 @@ public class GameLoop extends AnimationTimer{
                 //do same for the other 3 possibilities
                 break;
             case LEFTPATH:
-                //do same as THREEPATHS
+                if(Player.getInstance().getPosY()<=Maze.getMinY()&&Maze.getCurrentNode().getParent()!=null){
+                    Maze.getCurrentNode().getData().stop();
+                    Maze.setCurrentNode(Maze.getCurrentNode().getParent());
+                    Maze.getCurrentNode().getData().start();
+                }
+                else if(Player.getInstance().getPosY()>=Maze.getMaxY()&&Maze.getCurrentNode().getParent()!=null){
+                    Maze.getCurrentNode().getData().stop();
+                    Maze.setCurrentNode(Maze.getCurrentNode().getParent());
+                    Maze.getCurrentNode().getData().start();
+                }
                 break;
             case RIGHTPATH:
-                //do same as THREEPATHS
+
+                if(Player.getInstance().getPosY()<=Maze.getMinY()&&Maze.getCurrentNode().getParent()!=null){
+                    Maze.getCurrentNode().getData().stop();
+                    Maze.setCurrentNode(Maze.getCurrentNode().getParent());
+                    Maze.getCurrentNode().getData().start();
+                }
+                else if(Player.getInstance().getPosY()>=Maze.getMaxY()&&Maze.getCurrentNode().getParent()!=null){
+                    Maze.getCurrentNode().getData().stop();
+                    Maze.setCurrentNode(Maze.getCurrentNode().getParent());
+                    Maze.getCurrentNode().getData().start();
+                }
+
                 break;
+                //do same as THREEPATHS
         }
     }
 }
+
