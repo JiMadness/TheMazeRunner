@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.media.AudioClip;
 
 import java.io.File;
+import java.io.SyncFailedException;
 
 public class GameLoop extends AnimationTimer{
     private static GameLoop instance = new GameLoop();
@@ -22,12 +23,17 @@ public class GameLoop extends AnimationTimer{
         if (!gameTrack.isPlaying())
             gameTrack.play();
         Decorations.getInstance().updateDecorations();
+
         switch (Maze.getCurrentNode().getData().getStageType()){
             case THREEPATHS:
                 if(Player.getInstance().getPosX()<=Maze.getMinX()&&Maze.getCurrentNode().getParent()!=null){
                     Maze.getCurrentNode().getData().stop();
-                    Maze.setCurrentNode(Maze.getCurrentNode().getParent());
+
+                    Maze.setCurrentNode(Maze.getCurrentNode().getChildren().get(1));
+                    System.out.print("hellooo");
+
                     Maze.getCurrentNode().getData().start();
+
                 }
                else if(Player.getInstance().getPosX()>=Maze.getMaxX()&&Maze.getCurrentNode().getParent()!=null){
                     Maze.getCurrentNode().getData().stop();
