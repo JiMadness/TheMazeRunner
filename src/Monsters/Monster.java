@@ -129,6 +129,7 @@ public class Monster implements MonsterState{
             movingDirection = Moving.LEFT;
         }
     }
+
     public void moveRight(){
         if(getPosX()>Maze.getMaxX())
             return;
