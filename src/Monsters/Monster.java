@@ -140,6 +140,7 @@ public class Monster implements MonsterState{
     public void update(){
         this.state.MakeDecision();
         this.state.move();
+        this.monsterSprite.updatePosition(getPosX(), getPosY());
     }
 
     public double getPosX() {
