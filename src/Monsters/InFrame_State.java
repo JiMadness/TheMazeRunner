@@ -13,7 +13,6 @@ public class InFrame_State implements MonsterState{
     }
     @Override
     public void plantInMap() {
-
     }
 
     @Override

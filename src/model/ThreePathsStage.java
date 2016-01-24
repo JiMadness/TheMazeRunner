@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 public class ThreePathsStage implements GameStage {
     private int ID=0;
     private Path parentCameFrom;
-    private static Image stageImage = new Image("design/ThreePaths.jpg");
+    private static Image stageImage = new Image("design/threeeditable.jpg");
     public void start(){
         Maze.setMinX(0);
         Maze.setMinY(502);

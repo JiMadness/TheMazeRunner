@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 public class LeftPathStage implements GameStage{
     private int ID=0;
     private Path parentCameFrom;
-    private static Image stageImage = new Image("design/LeftPath.jpg");
+    private static Image stageImage = new Image("design/leftp.jpg");
     public void start(){
         Maze.setMinX(400);
         Maze.setMinY(502);

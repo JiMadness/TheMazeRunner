@@ -71,7 +71,6 @@ public class GameLoop extends AnimationTimer {
         if (!gameTrack.isPlaying())
             gameTrack.play();
             monsters.get(Maze.getCurrentNode().getHasMonster()).update();
-
         Decorations.getInstance().updateDecorations();
         handleTransitions();
     }
