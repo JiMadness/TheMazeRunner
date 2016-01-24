@@ -13,7 +13,7 @@ public class Node<T extends GameStage> {
     private List<Node<T>> children = new ArrayList<>();
     private Node<T> parent = null;
     private T data = null;
-
+private int HasMonster;
     public Node(T data) {
         this.data = data;
         Collections.addAll(this.getChildren(), null, null, null, null);
@@ -33,9 +33,10 @@ public class Node<T extends GameStage> {
         this.parent = parent;
     }
 
-    public void addChild(T data,int index) {
+    public void addChild(T data,int index,int HasMonster) {
         Node<T> child = new Node<>(data);
         child.setParent(this);
+        child.HasMonster=HasMonster;
         this.children.set(index,child);
     }
     public void initialize(){
@@ -79,5 +80,13 @@ public class Node<T extends GameStage> {
 
     public void removeParent() {
         this.parent = null;
+    }
+
+    public int getHasMonster() {
+        return HasMonster;
+    }
+
+    public void setHasMonster(int hasMonster) {
+        HasMonster = hasMonster;
     }
 }
