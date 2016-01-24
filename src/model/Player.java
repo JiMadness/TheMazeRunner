@@ -1,5 +1,6 @@
 package model;
 
+import graphics.Ammo;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
@@ -30,6 +31,10 @@ public class Player {
     }
 
     private Player() {
+        ArrayList<Image> Ammos = new ArrayList<>();
+        Ammos.add(new Image("Ammo/bom.png"));
+        Ammos.add(new Image("Ammo/ball.png"));
+
         ArrayList<Image> ups = new ArrayList<>();
         ups.add(new Image("sprites/character/u1.png"));
         ups.add(new Image("sprites/character/u2.png"));
@@ -47,6 +52,7 @@ public class Player {
         downs.add(new Image("sprites/character/d5.png"));
         downs.add(new Image("sprites/character/d6.png"));
         downs.add(new Image("sprites/character/d7.png"));
+
 
         ArrayList<Image> lefts = new ArrayList<>();
         lefts.add(new Image("sprites/character/l1.png"));
@@ -123,6 +129,8 @@ public class Player {
         if(getAmmo()>0){
             shootingSound.play();
             setAmmo(getAmmo()-1);
+            Ammo a=new Ammo(movingDirection,getPosX(),getPosY(),100000);
+            a.show();
             Decorations.getInstance().updateDecorations();
         }
         else noAmmo.play();

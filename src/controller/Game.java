@@ -39,6 +39,7 @@ public class Game{
                 Player.getInstance().moveRight();
             if (e.getCode().equals(KeyCode.SPACE))
                 Player.getInstance().shoot();
+
         });
     }
     public void makePlayerMovement(){
