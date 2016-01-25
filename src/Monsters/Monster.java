@@ -6,9 +6,6 @@ import model.Maze;
 
 import java.util.ArrayList;
 
-/**
- * Created by ehab on 1/13/2016.
- */
 public class Monster implements MonsterState{
     MonsterState movingUp_State;
     MonsterState movingDown_State;
@@ -32,15 +29,15 @@ public class Monster implements MonsterState{
         monsterType = x;
         ArrayList<Image> sprite = new ArrayList<>();
         switch (x){
-            case chrome:
+            case CHROME:
                 sprite.add(new Image("sprites/character/ChromeMonster.png"));
                 lives = 1;
                 break;
-            case fireFox:
+            case FIREFOX:
                 sprite.add(new Image("sprites/character/FireFoxMonster.png"));
                 lives = 2;
                 break;
-            case IE:
+            case EXPLORER:
                 sprite.add(new Image("sprites/character/IEMonster.png"));
                 lives = 3;
                 break;
@@ -179,13 +176,13 @@ public class Monster implements MonsterState{
     }
     public void resetLives(){
         switch (monsterType){
-            case chrome:
+            case CHROME:
                 lives = 1;
                 break;
-            case fireFox:
+            case FIREFOX:
                 lives = 2;
                 break;
-            case IE:
+            case EXPLORER:
                 lives = 3;
                 break;
         }

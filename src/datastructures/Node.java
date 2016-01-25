@@ -1,6 +1,8 @@
 package datastructures;
 
 
+import Monsters.MonsterType;
+import model.GameLoop;
 import model.GameStage;
 import model.Path;
 
@@ -13,12 +15,12 @@ public class Node<T extends GameStage> {
     private List<Node<T>> children = new ArrayList<>();
     private Node<T> parent = null;
     private T data = null;
-private int HasMonster;
+    private int monsterIndex = (int) Math.floor(Math.random()*3+1);
+
     public Node(T data) {
         this.data = data;
         Collections.addAll(this.getChildren(), null, null, null, null);
     }
-
     public Node(T data, Node<T> parent) {
         this.data = data;
         this.parent = parent;
@@ -33,25 +35,25 @@ private int HasMonster;
         this.parent = parent;
     }
 
-    public void addChild(T data,int index,int HasMonster) {
+    public void addChild(T data, int index) {
         Node<T> child = new Node<>(data);
         child.setParent(this);
-        child.HasMonster=HasMonster;
-        this.children.set(index,child);
+        this.children.set(index, child);
     }
-    public void initialize(){
-        switch (data.getParentCameFrom()){
+
+    public void initialize() {
+        switch (data.getParentCameFrom()) {
             case UP:
-                this.getChildren().set(Path.DOWN.ordinal(),this.getParent());
+                this.getChildren().set(Path.DOWN.ordinal(), this.getParent());
                 break;
             case DOWN:
-                this.getChildren().set(Path.UP.ordinal(),this.getParent());
+                this.getChildren().set(Path.UP.ordinal(), this.getParent());
                 break;
             case LEFT:
-                this.getChildren().set(Path.RIGHT.ordinal(),this.getParent());
+                this.getChildren().set(Path.RIGHT.ordinal(), this.getParent());
                 break;
             case RIGHT:
-                this.getChildren().set(Path.LEFT.ordinal(),this.getParent());
+                this.getChildren().set(Path.LEFT.ordinal(), this.getParent());
                 break;
         }
     }
@@ -59,9 +61,11 @@ private int HasMonster;
         child.setParent(this);
         this.children.add(child);
     }
-    public Node<T>getParent(){
+
+    public Node<T> getParent() {
         return parent;
     }
+
     public T getData() {
         return this.data;
     }
@@ -82,11 +86,7 @@ private int HasMonster;
         this.parent = null;
     }
 
-    public int getHasMonster() {
-        return HasMonster;
-    }
-
-    public void setHasMonster(int hasMonster) {
-        HasMonster = hasMonster;
+    public int getMonsterIndex() {
+        return monsterIndex;
     }
 }

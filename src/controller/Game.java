@@ -22,10 +22,10 @@ public class Game{
         testMaze.getMazeTree().getRoot().getData().start();
         Decorations.getInstance().updateDecorations();
 
-        testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.RIGHT),Path.RIGHT.ordinal(),2);
-        testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.LEFT),Path.LEFT.ordinal(),1);
-        testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.UP),Path.UP.ordinal(),2);
-        testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.DOWN),Path.DOWN.ordinal(),3);
+        testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.RIGHT),Path.RIGHT.ordinal());
+        testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.LEFT),Path.LEFT.ordinal());
+        testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.UP),Path.UP.ordinal());
+        testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.DOWN),Path.DOWN.ordinal());
     }
     public void initControls(){
         Main.getInstance().getMainScene().setOnKeyPressed(e -> {
