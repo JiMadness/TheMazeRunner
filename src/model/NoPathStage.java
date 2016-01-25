@@ -3,19 +3,19 @@ package model;
 import controller.Game;
 import javafx.scene.image.Image;
 
-public class ThreePathsStage implements GameStage {
+public class NoPathStage implements GameStage {
     private int ID=0;
     private Path parentCameFrom;
-    private static Image stageImage = new Image("design/Threeeditable.jpg");
+    private static Image stageImage = new Image("design/nopath1.jpg");
     public void start(){
         Maze.setMinX(0);
         Maze.setMinY(502);
         Maze.setMaxX(832);
-        Maze.setMaxY(108);
+        Maze.setMaxY(265);
         Game.getInstance().getFrame().getGraphicsContext2D().drawImage(stageImage, 0, 0, Game.getInstance().getFrame().getWidth(), Game.getInstance().getFrame().getHeight());
         Maze.getCurrentNode().initialize();
     }
-    public ThreePathsStage(Path parentCameFrom){
+    public NoPathStage(Path parentCameFrom){
         this.parentCameFrom = parentCameFrom;
     }
     public void stop() {
@@ -27,7 +27,7 @@ public class ThreePathsStage implements GameStage {
 
     @Override
     public StageType getStageType() {
-        return StageType.THREEPATHS;
+        return StageType.NoPath;
     }
 
     public void setID(int ID) {

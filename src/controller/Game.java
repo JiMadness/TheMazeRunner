@@ -26,7 +26,7 @@ public class Game{
 
         testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.RIGHT),Path.RIGHT.ordinal());
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.LEFT),Path.LEFT.ordinal());
-        testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.UP),Path.UP.ordinal());
+        testMaze.getMazeTree().getRoot().addChild(new NoPathStage(Path.UP),Path.UP.ordinal());
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.DOWN),Path.DOWN.ordinal());
     }
     public void initControls(){

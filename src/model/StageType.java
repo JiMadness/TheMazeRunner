@@ -1,5 +1,5 @@
 package model;
 
 public enum StageType {
-    THREEPATHS,LEFTPATH,RIGHTPATH
+    THREEPATHS,LEFTPATH,RIGHTPATH,NoPath
 }
