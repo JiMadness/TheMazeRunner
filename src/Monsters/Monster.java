@@ -144,9 +144,9 @@ public class Monster implements MonsterState{
         }else if(this.state == this.outOfFrame_State){
             System.err.print("outOfFrame_State");
         }
+        System.err.println();
         */
 
-        System.err.println();
         this.state.MakeDecision();
         this.state.move();
         this.monsterSprite.updatePosition(getPosX(), getApparentY());
