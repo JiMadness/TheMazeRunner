@@ -141,6 +141,7 @@ public class Player {
     }
     public void shoot(){
         if(getAmmo()>0){
+            if(!isWalkable()) return;
             shootingSound.play();
             setAmmo(getAmmo()-1);
             Ammo a=new Ammo(movingDirection,getPosX(),getPosY(),100000);
