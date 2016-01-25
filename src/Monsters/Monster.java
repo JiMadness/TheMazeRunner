@@ -129,6 +129,24 @@ public class Monster implements MonsterState{
         movingDirection = Moving.RIGHT;
     }
     public void update(){
+        /*
+        System.err.print("Current State: ");
+        if(this.state == this.movingRight_State){
+            System.err.print("movingRight_State");
+        }else if(this.state == this.movingLeft_State){
+            System.err.print("movingLeft_State");
+        }else if(this.state == this.movingUp_State){
+            System.err.print("movingUp_State");
+        }else if(this.state == this.movingDown_State){
+            System.err.print("movingDown_State");
+        }else if(this.state == this.inFrame_State){
+            System.err.print("inFrame_State");
+        }else if(this.state == this.outOfFrame_State){
+            System.err.print("outOfFrame_State");
+        }
+        */
+
+        System.err.println();
         this.state.MakeDecision();
         this.state.move();
         this.monsterSprite.updatePosition(getPosX(), getApparentY());
@@ -166,7 +184,7 @@ public class Monster implements MonsterState{
     }
 
     public void setMonsterSprite(Sprite monsterSprite) {
-        monsterSprite = monsterSprite;
+        this.monsterSprite = monsterSprite;
     }
     public void resetLives(){
         switch (monsterType){

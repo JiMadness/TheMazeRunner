@@ -2,20 +2,23 @@ package datastructures;
 
 
 import model.GameStage;
+import model.NoPathStage;
 import model.Path;
 
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Node<T extends GameStage> {
     private List<Node<T>> children = new ArrayList<>();
     private Node<T> parent = null;
     private T data = null;
-    private int monsterIndex = (int) Math.floor(Math.random()*3);
+    private int monsterIndex;
 
     public Node(T data) {
+            monsterIndex = new Random().nextInt(3) + 1;
         this.data = data;
         Collections.addAll(this.getChildren(), null, null, null, null);
     }

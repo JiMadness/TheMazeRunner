@@ -5,12 +5,9 @@ import controller.Game;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
+import model.GameLoop;
 import model.Maze;
 import model.Player;
-
-import java.io.File;
-import java.util.ArrayList;
 
 public class Ammo extends AnimationTimer {
     private int Limit = 10;
@@ -45,11 +42,16 @@ public class Ammo extends AnimationTimer {
                 if (max) {
                     this.hide();
                     this.stop();
-
                 }
-
                 else if (posY <= Maze.getMaxY()) {
                     AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
+                    max = true;
+                }
+                else if(checkInMonsterRange()){
+                    AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
+                    GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
+                    Player.getInstance().setScore(Player.getInstance().getScore()+5);
+
                     max = true;
                 }
                 else if (posX > Maze.getXPath() - Maze.getDelta() && posX < Maze.getXPath() + Maze.getDelta()) {
@@ -68,6 +70,12 @@ public class Ammo extends AnimationTimer {
                     AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
                     max = true;
                 }
+                else if(checkInMonsterRange()){
+                    AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
+                    GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
+                    Player.getInstance().setScore(Player.getInstance().getScore()+5);
+                    max = true;
+                }
                 else if (posX > Maze.getXPath() - Maze.getDelta() && posX < Maze.getXPath() + Maze.getDelta()) {
                     posY += 2;
                     AmmoCanvas.getGraphicsContext2D().drawImage(Shoot, posX-10, posY+10);
@@ -84,6 +92,13 @@ public class Ammo extends AnimationTimer {
                     AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
                     max = true;
                 }
+                else if(checkInMonsterRange()){
+                    AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
+                    GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
+                    Player.getInstance().setScore(Player.getInstance().getScore()+5);
+
+                    max = true;
+                }
                 else if (posY > Maze.getYPath() - Maze.getDelta() && posY < Maze.getYPath() + Maze.getDelta()) {
                     posX += 2;
                     AmmoCanvas.getGraphicsContext2D().drawImage(Shoot, posX+30, posY);
@@ -98,12 +113,25 @@ public class Ammo extends AnimationTimer {
                     AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
                     max = true;
                 }
+                else if(checkInMonsterRange()){
+                    AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
+                    GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
+                    Player.getInstance().setScore(Player.getInstance().getScore()+5);
+
+                    max = true;
+                }
                 else if (posY > Maze.getYPath() - Maze.getDelta() && posY < Maze.getYPath() + Maze.getDelta()) {
                     posX -= 2;
                     AmmoCanvas.getGraphicsContext2D().drawImage(Shoot, posX-30, posY);
                 }
             }
         }
+    }
+    public boolean checkInMonsterRange(){
+        return (this.posX < GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosX() + 30)
+                && (this.posX > GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosX() - 30)
+                && (this.posY > GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosY() - 30)
+                && (this.posY < GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosY() + 30);
     }
 
     public void updatePosition(double newX, double newY) {

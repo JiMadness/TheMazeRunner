@@ -22,6 +22,7 @@ public class GameLoop extends AnimationTimer {
     private GameLoop() {
         setMonsters(new ArrayList<>());
         getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
         getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
         getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
     }
@@ -34,6 +35,7 @@ public class GameLoop extends AnimationTimer {
             getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).plantInFrame();
             Maze.getCurrentNode().getData().start();
             Player.getInstance().setPosX(Maze.getMaxX() - 1);
+            System.err.println(Maze.getCurrentNode().getMonsterIndex());
         } else if (Player.getInstance().getPosX() >= 832 && Maze.getCurrentNode().getChildren().get(Path.RIGHT.ordinal()) != null) {
             getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
             Maze.getCurrentNode().getData().stop();
@@ -43,6 +45,7 @@ public class GameLoop extends AnimationTimer {
 
             Maze.getCurrentNode().getData().start();
             Player.getInstance().setPosX(Maze.getMinX() + 1);
+            System.err.println(Maze.getCurrentNode().getMonsterIndex());
         } else if (Player.getInstance().getPosY() >= 502 && Maze.getCurrentNode().getChildren().get(Path.DOWN.ordinal()) != null) {
             getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
             Maze.getCurrentNode().getData().stop();
@@ -51,6 +54,7 @@ public class GameLoop extends AnimationTimer {
             getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).plantInFrame();
             Maze.getCurrentNode().getData().start();
             Player.getInstance().setPosY(Maze.getMaxY() + 1);
+            System.err.println(Maze.getCurrentNode().getMonsterIndex());
         } else if (Player.getInstance().getPosY() <= 108 && Maze.getCurrentNode().getChildren().get(Path.UP.ordinal()) != null) {
             getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
             Maze.getCurrentNode().getData().stop();
@@ -59,6 +63,7 @@ public class GameLoop extends AnimationTimer {
             getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).plantInFrame();
             Maze.getCurrentNode().getData().start();
             Player.getInstance().setPosY(Maze.getMinY() - 1);
+            System.err.println(Maze.getCurrentNode().getMonsterIndex());
         }
     }
 
