@@ -47,7 +47,7 @@ public class InFrame_State implements MonsterState{
     public void MakeDecision() {
         //plant in monster decision;
         this.plantInFrame();
-        Monster.getMonsterSprite().show();
+        this.monster.getMonsterSprite().show();
         if((Player.getInstance().getPosY() < Maze.getYPath()+Maze.getDelta())
                 &&(Player.getInstance().getPosY() > Maze.getXPath()- Maze.getDelta())
                 ){
@@ -67,7 +67,7 @@ public class InFrame_State implements MonsterState{
 
     @Override
     public void switchFrame() {
-        Monster.getMonsterSprite().hide();
+        this.monster.getMonsterSprite().hide();
         this.monster.state = this.monster.outOfFrame_State;
     }
 
@@ -85,7 +85,7 @@ public class InFrame_State implements MonsterState{
     @Override
     public void lifeloss() {
         if(this.monster.loseLife() == 0){
-            Monster.getMonsterSprite().hide();
+            this.monster.getMonsterSprite().hide();
             this.monster.setPosX(0);
             this.monster.setPosY(0);
             this.monster.state = this.monster.dead_State;

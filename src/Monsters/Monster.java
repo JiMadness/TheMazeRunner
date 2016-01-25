@@ -18,7 +18,7 @@ public class Monster implements MonsterState{
 
     MonsterState state = dead_State;
     boolean doingTurn;
-    private static Sprite monsterSprite;
+    private Sprite monsterSprite;
     private double posX=200;
     private double posY=200;
     private double ApparentY =250;
@@ -43,7 +43,7 @@ public class Monster implements MonsterState{
                 lives = 3;
                 break;
         }
-        setMonsterSprite(new Sprite(sprite, getPosX(), getPosY(), getRefreshTime()));
+        this.monsterSprite = new Sprite(sprite, getPosX(), getPosY(), getRefreshTime());
 
         movingUp_State = new MovingUp_State(this);
         movingDown_State = new MovingDown_State(this);
@@ -131,7 +131,7 @@ public class Monster implements MonsterState{
     public void update(){
         this.state.MakeDecision();
         this.state.move();
-        monsterSprite.updatePosition(getPosX(), getApparentY());
+        this.monsterSprite.updatePosition(getPosX(), getApparentY());
     }
 
     public double getPosX() {
@@ -161,12 +161,12 @@ public class Monster implements MonsterState{
         this.refreshTime = refreshTime;
     }
 
-    public static Sprite getMonsterSprite() {
+    public Sprite getMonsterSprite() {
         return monsterSprite;
     }
 
     public void setMonsterSprite(Sprite monsterSprite) {
-        Monster.monsterSprite = monsterSprite;
+        monsterSprite = monsterSprite;
     }
     public void resetLives(){
         switch (monsterType){
