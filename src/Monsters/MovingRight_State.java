@@ -100,7 +100,7 @@ public class MovingRight_State implements MonsterState{
         Player.getInstance().getLeftSprite().hide();
         Player.getInstance().getRightSprite().hide();
         Player.getInstance().getDownSprite().hide();
-        this.monster.getMonsterSprite().hide();
+        this.switchFrame();
 
     }
 }
