@@ -3,6 +3,8 @@ package Monsters;
 import model.Maze;
 import model.Player;
 
+import java.util.Random;
+
 /**
  * Created by ehab on 1/17/2016.
  */
@@ -20,8 +22,19 @@ public class InFrame_State implements MonsterState{
         //this should set the x and y position according to the position of the player(randomly but away from the player with tolerance)
         //and according to the type of the node
         //this is the first attempt
-        this.monster.setPosY(Maze.getMinY());
-        this.monster.setPosX(Maze.getXPath());
+        if((Player.getInstance().getPosY() < Maze.getYPath()+Maze.getDelta())
+           &&(Player.getInstance().getPosY() > Maze.getXPath()- Maze.getDelta())
+           ){
+            //it's in the Xpath
+            System.err.println("Player In X");
+            this.monster.setPosY(new Random().nextInt(Maze.getMinY() - Maze.getMaxY())  + Maze.getMaxY());
+            this.monster.setPosX(Maze.getXPath());
+        }else{
+            //it's in the Y path
+            System.err.println("Player In Y");
+            this.monster.setPosY(Maze.getYPath());
+            this.monster.setPosX(new Random().nextInt(Maze.getMaxX() - Maze.getMinX())  + Maze.getMinX());
+        }
     }
 
     @Override
@@ -34,7 +47,21 @@ public class InFrame_State implements MonsterState{
         //plant in monster decision;
         this.plantInFrame();
         this.monster.getMonsterSprite().show();
-        this.monster.state = this.monster.movingLeft_State;
+        if((Player.getInstance().getPosY() < Maze.getYPath()+Maze.getDelta())
+                &&(Player.getInstance().getPosY() > Maze.getXPath()- Maze.getDelta())
+                ){
+            if(new Random().nextBoolean()){
+                this.monster.state = this.monster.movingUp_State;
+            }else{
+                this.monster.state = this.monster.movingDown_State;
+            }
+        }else {
+            if(new Random().nextBoolean()){
+                this.monster.state = this.monster.movingLeft_State;
+            }else{
+                this.monster.state = this.monster.movingRight_State;
+            }
+        }
     }
 
     @Override

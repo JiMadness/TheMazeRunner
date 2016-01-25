@@ -1,5 +1,6 @@
 package Monsters;
 
+import controller.Game;
 import model.Maze;
 import model.Player;
 
@@ -33,26 +34,36 @@ public class MovingLeft_State implements MonsterState{
     @Override
     public void MakeDecision() {
         this.monster.setPosY(Maze.getYPath());
-        if(this.monster.getPosX()-1 == Player.getInstance().getPosX()){
+        if(monster.checkInPlayerRange()){
             this.monster.killPlayer();
+            return;
+        }
+        if(!monster.checkTurningPoint() && this.monster.doingTurn){
+            this.monster.doingTurn = false;
+        }
+        if(monster.checkTurningPoint() && this.monster.doingTurn){
+            this.monster.state = this.monster.movingLeft_State;
             return;
         }
         if(this.monster.getPosX()-1 <= Maze.getMinX()){
             this.monster.state = this.monster.movingRight_State;
             return;
         }
-        if((this.monster.getPosX() <= Maze.getXPath()) && (this.monster.getPosY()+Maze.getDelta()+5 < Maze.getMinY())) {
-            //moving down is available (which is it's left)
-            this.monster.state = this.monster.movingDown_State;
-            return;
-        }else if(this.monster.getPosX() > Maze.getMinX()){
-            //moving left is available (which is it's front)
-            this.monster.state = this.monster.movingLeft_State;
-            return;
-        }else {
-            //moving up is available (which is it's right)
-            this.monster.state = this.monster.movingUp_State;
-            return;
+        if(monster.checkTurningPoint()) {
+            this.monster.doingTurn = true;
+            if (monster.getPosX()>= Maze.getXPath()) {
+                //moving down is available (which is it's left)
+                this.monster.state = this.monster.movingDown_State;
+                return;
+            } else if (this.monster.getPosX() > Maze.getMinX()) {
+                //moving left is available (which is it's front)
+                this.monster.state = this.monster.movingLeft_State;
+                return;
+            } else {
+                //moving up is available (which is it's right)
+                this.monster.state = this.monster.movingUp_State;
+                return;
+            }
         }
     }
 
@@ -85,6 +96,11 @@ public class MovingLeft_State implements MonsterState{
 
     @Override
     public void killPlayer() {
-
+        Player.getInstance().setWalkable(false);
+        Game.getInstance().getFrame().getGraphicsContext2D().drawImage(Game.getInstance().gameOverImage, 0, 0, Game.getInstance().getFrame().getWidth(), Game.getInstance().getFrame().getHeight());
+        Player.getInstance().getUpSprite().hide();
+        Player.getInstance().getLeftSprite().hide();
+        Player.getInstance().getRightSprite().hide();
+        Player.getInstance().getDownSprite().hide();
     }
 }

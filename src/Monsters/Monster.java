@@ -3,6 +3,7 @@ package Monsters;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import model.Maze;
+import model.Player;
 
 import java.util.ArrayList;
 
@@ -17,15 +18,16 @@ public class Monster implements MonsterState{
     MonsterState alive_State;
 
     MonsterState state = dead_State;
-
+    boolean doingTurn;
     private Sprite monsterSprite;
     private double posX=200;
     private double posY=200;
+    private double ApparentY =250;
     private double refreshTime = 100;
     private static Moving movingDirection = Moving.UP;
     private MonsterType monsterType;
     private int lives;
-    public Monster(MonsterType x){
+    private Monster(MonsterType x){
         monsterType = x;
         ArrayList<Image> sprite = new ArrayList<>();
         switch (x){
@@ -99,46 +101,38 @@ public class Monster implements MonsterState{
         this.state.killPlayer();
     }
 
+    public double getApparentY() {
+        return ApparentY;
+    }
+
+    public void setApparentY(double apparentY) {
+        ApparentY = apparentY;
+    }
+
     public enum Moving{UP,DOWN,LEFT,RIGHT}
 
 
     public void moveUp(){
-        if(getPosY()<Maze.getMaxY())
-            return;
-        if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
-            setPosY(getPosY() - 1);
-            movingDirection = Moving.UP;
-        }
+        setPosY(getPosY() - 1);
+        movingDirection = Moving.UP;
     }
     public void moveDown(){
-        if(getPosY()> Maze.getMinY())
-            return;
-        if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
             setPosY(getPosY() + 1);
             movingDirection = Moving.DOWN;
-        }
     }
     public void moveLeft(){
-        if(getPosX()<Maze.getMinX())
-            return;
-        if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
             setPosX(getPosX() - 1);
             movingDirection = Moving.LEFT;
-        }
     }
 
     public void moveRight(){
-        if(getPosX()>Maze.getMaxX())
-            return;
-        if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
-            setPosX(getPosX() + 1);
-            movingDirection = Moving.RIGHT;
-        }
+        setPosX(getPosX() + 1);
+        movingDirection = Moving.RIGHT;
     }
     public void update(){
         this.state.MakeDecision();
         this.state.move();
-        this.monsterSprite.updatePosition(getPosX(), getPosY());
+        this.monsterSprite.updatePosition(getPosX(), getApparentY());
     }
 
     public double getPosX() {
@@ -151,12 +145,13 @@ public class Monster implements MonsterState{
 
     public void setPosX(double posX) {
         this.posX = posX;
-        getMonsterSprite().updatePosition(posX, posY);
+        getMonsterSprite().updatePosition(posX, getApparentY());
 
     }
     public void setPosY(double posY) {
         this.posY = posY;
-        getMonsterSprite().updatePosition(posX, posY);
+        this.setApparentY(this.posY + 45);
+        getMonsterSprite().updatePosition(posX, getApparentY());
     }
 
     public double getRefreshTime() {
@@ -193,5 +188,20 @@ public class Monster implements MonsterState{
     }
     public int getLives(){
         return lives;
+    }
+    public boolean checkTurningPoint(){
+        return (this.getPosX() < (Maze.getYPath() + Maze.getDelta()))
+                && (this.getPosX() > (Maze.getYPath() - Maze.getDelta()))
+                && (this.getPosY()  < (Maze.getXPath() + Maze.getDelta()))
+                && (this.getPosY()  > (Maze.getXPath() - Maze.getDelta()));
+    }
+    public boolean checkInPlayerRange(){
+        return (this.getPosX() < Player.getInstance().getPosX() + 30)
+                && (this.getPosX() > Player.getInstance().getPosX() - 30)
+                && (this.getPosY() > Player.getInstance().getPosY() - 30)
+                && (this.getPosY() < Player.getInstance().getPosY() + 30);
+    }
+    public static Monster makeMonster(MonsterType x){
+        return new Monster(x);
     }
 }

@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import main.Main;
@@ -15,6 +16,7 @@ public class Game{
     @FXML
     private StackPane layers;
     public Maze testMaze = new Maze(new ThreePathsStage(Path.NULL));
+    public Image gameOverImage = new Image("/backgrounds/gameOver.png");
     @FXML
     private void initialize(){
         instance= this;

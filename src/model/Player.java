@@ -10,6 +10,14 @@ import java.util.ArrayList;
 
 public class Player {
 
+    public boolean isWalkable() {
+        return walkable;
+    }
+
+    public void setWalkable(boolean walkable) {
+        this.walkable = walkable;
+    }
+
     public enum Moving{UP,DOWN,LEFT,RIGHT}
     private static Player instance = new Player();
 
@@ -26,6 +34,7 @@ public class Player {
     private double refreshTime = 100;
     private int score=0;
     private int ammo=10;
+    private boolean walkable;
     public static Player getInstance() {
         return instance;
     }
@@ -76,8 +85,10 @@ public class Player {
         downSprite = new Sprite(downs, getPosX(), getPosY(), getRefreshTime());
         leftSprite = new Sprite(lefts, getPosX(), getPosY(), getRefreshTime());
         rightSprite = new Sprite(rights, getPosX(), getPosY(), getRefreshTime());
+        setWalkable(true);
     }
     public void moveUp(){
+        if(!isWalkable()) return;
         if(getPosY()<Maze.getMaxY())
             return;
         if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
@@ -90,6 +101,7 @@ public class Player {
         }
     }
     public void moveDown(){
+        if(!isWalkable()) return;
         if(getPosY()>Maze.getMinY())
             return;
         if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
@@ -102,6 +114,7 @@ public class Player {
         }
     }
     public void moveLeft(){
+        if(!isWalkable()) return;
         if(getPosX()<Maze.getMinX())
             return;
         if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
@@ -114,6 +127,7 @@ public class Player {
         }
     }
     public void moveRight(){
+        if(!isWalkable()) return;
         if(getPosX()>Maze.getMaxX())
             return;
         if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {

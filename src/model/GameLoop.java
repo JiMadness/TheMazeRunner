@@ -22,9 +22,9 @@ public class GameLoop extends AnimationTimer {
     private GameLoop() {
         setMonsters(new ArrayList<>());
         getMonsters().add(null);
-        getMonsters().add(new Monster(MonsterType.CHROME));
-        getMonsters().add(new Monster(MonsterType.FIREFOX));
-        getMonsters().add(new Monster(MonsterType.EXPLORER));
+        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
+        getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
     }
     private void handleTransitions() {
         if (Player.getInstance().getPosX() <= 0 && Maze.getCurrentNode().getChildren().get(Path.LEFT.ordinal()) != null) {
