@@ -1,12 +1,11 @@
 package Monsters;
 
 import controller.Game;
+import model.GameLoop;
 import model.Maze;
 import model.Player;
 
-/**
- * Created by ehab on 1/17/2016.
- */
+
 public class MovingRight_State implements MonsterState{
     Monster monster;
     public  MovingRight_State(Monster x){
@@ -73,7 +72,7 @@ public class MovingRight_State implements MonsterState{
     @Override
     public void switchFrame() {
         this.monster.state = this.monster.outOfFrame_State;
-        this.monster.getMonsterSprite().hide();
+        Monster.getMonsterSprite().hide();
     }
 
     @Override
@@ -90,7 +89,7 @@ public class MovingRight_State implements MonsterState{
     @Override
     public void lifeloss() {
         if(this.monster.loseLife() == 0){
-            this.monster.getMonsterSprite().hide();
+            Monster.getMonsterSprite().hide();
             this.monster.setPosX(0);
             this.monster.setPosY(0);
             this.monster.state = this.monster.dead_State;
@@ -105,5 +104,7 @@ public class MovingRight_State implements MonsterState{
         Player.getInstance().getLeftSprite().hide();
         Player.getInstance().getRightSprite().hide();
         Player.getInstance().getDownSprite().hide();
+        Monster.getMonsterSprite().hide();
+
     }
 }

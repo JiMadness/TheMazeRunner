@@ -1,8 +1,6 @@
 package datastructures;
 
 
-import Monsters.MonsterType;
-import model.GameLoop;
 import model.GameStage;
 import model.Path;
 
@@ -15,7 +13,7 @@ public class Node<T extends GameStage> {
     private List<Node<T>> children = new ArrayList<>();
     private Node<T> parent = null;
     private T data = null;
-    private int monsterIndex = (int) Math.floor(Math.random()*3+1);
+    private int monsterIndex = (int) Math.floor(Math.random()*3);
 
     public Node(T data) {
         this.data = data;

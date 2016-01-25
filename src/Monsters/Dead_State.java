@@ -25,7 +25,7 @@ public class Dead_State implements MonsterState{
 
     @Override
     public void MakeDecision() {
-        this.monster.getMonsterSprite().hide();
+        Monster.getMonsterSprite().hide();
         this.monster.setPosX(0);
         this.monster.setPosY(0);
         this.monster.state = this.monster.dead_State;

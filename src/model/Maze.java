@@ -5,7 +5,7 @@ import datastructures.Tree;
 
 
 public class Maze {
-    private static Tree<GameStage> mazeTree = new Tree<>();
+    private Tree<GameStage> mazeTree = new Tree<>();
     private static Node<GameStage> currentNode;
     private static int minX;
     private static int minY;
