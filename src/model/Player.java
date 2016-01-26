@@ -10,10 +10,14 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private boolean walkable;
+    private boolean gameOver;
 
-    public void setWalkable(boolean walkable) {
-        this.walkable = walkable;
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 
 
@@ -85,6 +89,7 @@ public class Player {
         rightSprite = new Sprite(rights, getPosX(), getPosY(), getRefreshTime());
     }
     public void moveUp(){
+        if(isGameOver()) return;
         if(getPosY()<Maze.getMaxY())
             return;
         if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
@@ -103,6 +108,7 @@ public class Player {
         }
     }
     public void moveDown(){
+        if(isGameOver()) return;
         if(getPosY()>Maze.getMinY())
             return;
         if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
@@ -121,6 +127,7 @@ public class Player {
         }
     }
     public void moveLeft(){
+        if(isGameOver()) return;
         if(getPosX()<Maze.getMinX())
             return;
         if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
@@ -140,6 +147,7 @@ public class Player {
         }
     }
     public void moveRight(){
+        if(isGameOver()) return;
         if(getPosX()>Maze.getMaxX())
             return;
         if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
@@ -158,6 +166,7 @@ public class Player {
         }
     }
     public void shoot(){
+        if(isGameOver()) return;
         if(getAmmo()>0){
             shootingSound.play();
             setAmmo(getAmmo()-1);
