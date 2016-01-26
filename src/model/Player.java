@@ -1,6 +1,7 @@
 package model;
 
 import graphics.Ammo;
+import graphics.Pool;
 import graphics.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
@@ -10,14 +11,12 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private boolean gameOver;
+    public boolean isGameOver() {
+        return gameOver;
+    }
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
-    }
-
-    public boolean isGameOver() {
-        return gameOver;
     }
 
 
@@ -37,6 +36,7 @@ public class Player {
     private double refreshTime = 100;
     private int score=0;
     private int ammo=10;
+    private boolean gameOver;
     public static Player getInstance() {
         return instance;
     }
@@ -87,6 +87,7 @@ public class Player {
         downSprite = new Sprite(downs, getPosX(), getPosY(), getRefreshTime());
         leftSprite = new Sprite(lefts, getPosX(), getPosY(), getRefreshTime());
         rightSprite = new Sprite(rights, getPosX(), getPosY(), getRefreshTime());
+        setGameOver(false);
     }
     public void moveUp(){
         if(isGameOver()) return;
@@ -108,7 +109,7 @@ public class Player {
         }
     }
     public void moveDown(){
-        if(isGameOver()) return;
+        if(gameOver) return;
         if(getPosY()>Maze.getMinY())
             return;
         if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
@@ -128,6 +129,7 @@ public class Player {
     }
     public void moveLeft(){
         if(isGameOver()) return;
+
         if(getPosX()<Maze.getMinX())
             return;
         if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
@@ -166,15 +168,16 @@ public class Player {
         }
     }
     public void shoot(){
-        if(isGameOver()) return;
-        if(getAmmo()>0){
+        Ammo temp= Pool.GetAmmo(movingDirection,getPosX(),getPosY(),100000);
+        if(temp!=null){
+            if(isGameOver()) return;
             shootingSound.play();
-            setAmmo(getAmmo()-1);
-            Ammo a=new Ammo(movingDirection,getPosX(),getPosY(),100000);
-            a.show();
+            temp.show();
             Decorations.getInstance().updateDecorations();
+            System.out.println("Limit:"+Pool.getAmmoLimit()+",Available:"+Pool._available.size()+",inUse:"+Pool._inUse.size());
         }
-        else noAmmo.play();
+        else{ noAmmo.play();
+        }
     }
     public Sprite getUpSprite() {
         return upSprite;
