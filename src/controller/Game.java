@@ -16,7 +16,7 @@ public class Game{
     @FXML
     private StackPane layers;
     public Maze testMaze = new Maze(new ThreePathsStage(Path.NULL));
-    public Image gameOverImage = new Image("/backgrounds/gameOver.png");
+    public Image gameOverImage = new Image("/backgrounds/Gameover.jpg");
     @FXML
     private void initialize(){
         instance= this;
