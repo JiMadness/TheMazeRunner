@@ -93,6 +93,7 @@ public class MovingUp_State implements MonsterState{
     @Override
     public void killPlayer() {
         Player.getInstance().setWalkable(false);
+        Maze.getCurrentNode().getData().stop();
         Game.getInstance().getFrame().getGraphicsContext2D().drawImage(Game.getInstance().gameOverImage, 0, 0, Game.getInstance().getFrame().getWidth(), Game.getInstance().getFrame().getHeight());
         Player.getInstance().getUpSprite().hide();
         Player.getInstance().getLeftSprite().hide();
