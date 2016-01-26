@@ -16,7 +16,7 @@ public class Game{
     @FXML
     private StackPane layers;
     public Maze testMaze = new Maze(new ThreePathsStage(Path.NULL));
-    public Image gameOverImage = new Image("/backgrounds/gameover.jpg");
+    public Image gameOverImage = new Image("/backgrounds/gameOver.png");
     @FXML
     private void initialize(){
         instance= this;
@@ -26,16 +26,8 @@ public class Game{
 
         testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.RIGHT),Path.RIGHT.ordinal());
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.LEFT),Path.LEFT.ordinal());
-        testMaze.getMazeTree().getRoot().addChild(new ThreePathsStage(Path.UP),Path.UP.ordinal());
-        testMaze.getMazeTree().getRoot().getChildren().get(2).addChild(new NoPathStage(Path.UP),Path.UP.ordinal());
-        testMaze.getMazeTree().getRoot().getChildren().get(0).addChild(new LeftPathStage(Path.DOWN),Path.DOWN.ordinal());
-        testMaze.getMazeTree().getRoot().getChildren().get(0).addChild(new RightPathStage(Path.UP),Path.UP.ordinal());
-        testMaze.getMazeTree().getRoot().getChildren().get(0).getChildren().get(1).addChild(new RightPathStage(Path.RIGHT),Path.RIGHT.ordinal());
-        testMaze.getMazeTree().getRoot().getChildren().get(0).getChildren().get(1).addChild(new NoPathStage(Path.DOWN),Path.DOWN.ordinal());
-        testMaze.getMazeTree().getRoot().getChildren().get(0).getChildren().get(1).getChildren().get(0).addChild(testMaze.getMazeTree().getRoot().getChildren().get(0).getChildren().get(1).getChildren().get(1));
-
-
-
+        testMaze.getMazeTree().getRoot().addChild(new NoPathStage(Path.UP),Path.UP.ordinal());
+        testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.DOWN),Path.DOWN.ordinal());
     }
     public void initControls(){
         Main.getInstance().getMainScene().setOnKeyPressed(e -> {
@@ -49,7 +41,6 @@ public class Game{
                 Player.getInstance().moveRight();
             if (e.getCode().equals(KeyCode.SPACE))
                 Player.getInstance().shoot();
-
         });
     }
     public void makePlayerMovement(){
@@ -62,8 +53,6 @@ public class Game{
         else if(Player.getInstance().isLookingRight())
             Player.getInstance().getRightSprite().stop();
     }
-
-
 
     public static Game getInstance(){return instance;}
     public Canvas getFrame(){return frame;}

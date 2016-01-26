@@ -101,7 +101,7 @@ public class Ammo extends AnimationTimer {
                 }
                 else if (posY > Maze.getYPath() - Maze.getDelta() && posY < Maze.getYPath() + Maze.getDelta()) {
                     posX += 2;
-                    AmmoCanvas.getGraphicsContext2D().drawImage(Shoot, posX+30, posY);
+                     AmmoCanvas.getGraphicsContext2D().drawImage(Shoot, posX+30, posY);
                 }
             }
             if (dir == Player.Moving.LEFT) {

@@ -10,13 +10,12 @@ import java.util.ArrayList;
 
 public class Player {
 
-    public boolean isWalkable() {
-        return walkable;
-    }
+    private boolean walkable;
 
     public void setWalkable(boolean walkable) {
         this.walkable = walkable;
     }
+
 
     public enum Moving{UP,DOWN,LEFT,RIGHT}
     private static Player instance = new Player();
@@ -34,7 +33,6 @@ public class Player {
     private double refreshTime = 100;
     private int score=0;
     private int ammo=10;
-    private boolean walkable;
     public static Player getInstance() {
         return instance;
     }
@@ -85,10 +83,8 @@ public class Player {
         downSprite = new Sprite(downs, getPosX(), getPosY(), getRefreshTime());
         leftSprite = new Sprite(lefts, getPosX(), getPosY(), getRefreshTime());
         rightSprite = new Sprite(rights, getPosX(), getPosY(), getRefreshTime());
-        setWalkable(true);
     }
     public void moveUp(){
-        if(!isWalkable()) return;
         if(getPosY()<Maze.getMaxY())
             return;
         if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
@@ -97,11 +93,16 @@ public class Player {
             getRightSprite().hide();
             setPosY(getPosY() - 2);
             getUpSprite().show();
+            if(checkInGiftRange()){
+                if(!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()){
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();}
+            }
             movingDirection = Moving.UP;
         }
     }
     public void moveDown(){
-        if(!isWalkable()) return;
         if(getPosY()>Maze.getMinY())
             return;
         if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
@@ -110,11 +111,16 @@ public class Player {
             getRightSprite().hide();
             setPosY(getPosY() + 2);
             getDownSprite().show();
+            if(checkInGiftRange()){
+                if(!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()){
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();}
+            }
             movingDirection = Moving.DOWN;
         }
     }
     public void moveLeft(){
-        if(!isWalkable()) return;
         if(getPosX()<Maze.getMinX())
             return;
         if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
@@ -123,11 +129,17 @@ public class Player {
             getRightSprite().hide();
             setPosX(getPosX() - 2);
             getLeftSprite().show();
+            if(checkInGiftRange()){
+                if(!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()){
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
+
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();}
+            }
             movingDirection = Moving.LEFT;
         }
     }
     public void moveRight(){
-        if(!isWalkable()) return;
         if(getPosX()>Maze.getMaxX())
             return;
         if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
@@ -136,12 +148,17 @@ public class Player {
             getLeftSprite().hide();
             setPosX(getPosX() + 2);
             getRightSprite().show();
+            if(checkInGiftRange()){
+                if(!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()){
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
+                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();}
+            }
             movingDirection = Moving.RIGHT;
         }
     }
     public void shoot(){
         if(getAmmo()>0){
-            if(!isWalkable()) return;
             shootingSound.play();
             setAmmo(getAmmo()-1);
             Ammo a=new Ammo(movingDirection,getPosX(),getPosY(),100000);
@@ -227,5 +244,11 @@ public class Player {
 
     public void setAmmo(int ammo) {
         this.ammo = ammo;
+    }
+    public boolean checkInGiftRange(){
+        return (this.posX < GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).getPosX() + 30)
+                && (this.posX > GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).getPosX() - 30)
+                && (this.posY > GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).getPosY() - 30)
+                && (this.posY < GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).getPosY() + 30);
     }
 }

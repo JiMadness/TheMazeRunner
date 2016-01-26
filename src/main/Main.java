@@ -1,10 +1,17 @@
 package main;
+
+import Monsters.Monster;
+import Monsters.MonsterType;
 import controller.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+
+
 public class Main extends Application {
     private static Main instance;
     private Stage primaryStage;
@@ -15,6 +22,7 @@ public class Main extends Application {
         this.primaryStage=primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("../view/game.fxml"));
         mainScene = new Scene(root,900,600);
+
         primaryStage.setTitle("The Maze Runner");
         primaryStage.setScene(mainScene);
         primaryStage.show();
