@@ -16,7 +16,7 @@ public class Node<T extends GameStage> {
     private T data = null;
     private int MonsterIndex;
     private boolean winFlag;
-    private int GiftsIndex = (int) Math.floor(Math.random()*8);
+    public int GiftsIndex = (int) Math.floor(Math.random()*8);
     public Node(T data) {
         this.data = data;
         Collections.addAll(this.getChildren(), null, null, null, null);
@@ -42,6 +42,11 @@ public class Node<T extends GameStage> {
         Node<T> child = new Node<>(data);
         child.setMonsterIndex(monsterID);
         child.setWinFlag(winFlag);
+        child.setParent(this);
+        this.children.set(index, child);
+    }
+    public void addChild(T data, int index) {
+        Node<T> child = new Node<>(data);
         child.setParent(this);
         this.children.set(index, child);
     }

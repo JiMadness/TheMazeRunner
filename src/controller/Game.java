@@ -16,6 +16,7 @@ public class Game{
     private Canvas frame;
     @FXML
     private StackPane layers;
+    public Maze testMaze1 = new Maze(new ThreePathsStage(Path.NULL));
     public Maze testMaze = new Maze(new ThreePathsStage(Path.NULL));
     public Image gameOverImage = new Image("/backgrounds/Gameover.jpg");
     public ImageView gameOverImageView = new ImageView(gameOverImage);

@@ -6,6 +6,7 @@ import controller.Game;
 import graphics.AmmoGift;
 import graphics.Gifts;
 import graphics.ScoreGift;
+import graphics.WiningGift;
 import javafx.animation.AnimationTimer;
 import javafx.scene.media.AudioClip;
 
@@ -25,16 +26,9 @@ public class GameLoop extends AnimationTimer {
     private GameLoop() {
         setMonsters(new ArrayList<>());
         getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
-        getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
         getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
         getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
-        getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
+
 
         gifts=new ArrayList<>();
         gifts.add(new ScoreGift());
@@ -45,6 +39,7 @@ public class GameLoop extends AnimationTimer {
         gifts.add(new AmmoGift());
         gifts.add(new AmmoGift());
         gifts.add(new AmmoGift());
+        gifts.add(new WiningGift());
     }
     private void handleTransitions() {
         if (Player.getInstance().getPosX() <= 0 && Maze.getCurrentNode().getChildren().get(Path.LEFT.ordinal()) != null) {
@@ -118,11 +113,5 @@ public class GameLoop extends AnimationTimer {
     }
     public static void setGifts(ArrayList<Gifts> gifts) {
         GameLoop.gifts = gifts;
-    }
-    public void reviveMonsters(){
-        for(Monster x: monsters){
-            x.resetLives();
-            x.Revive();
-        }
     }
 }
