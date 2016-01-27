@@ -1,7 +1,7 @@
 package main;
 
 import Menus.GameMenu;
-import Menus.GameOverMenu;
+import Menus.YouWinMenu;
 import controller.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +17,14 @@ public class Main extends Application {
     private static Main instance;
     private Stage primaryStage;
     private Stage welcomeStage;
+    private Stage winningStage;
     private Scene mainScene;
     @Override
     public void start(Stage primaryStage) throws Exception{
         instance=this;
         this.primaryStage=primaryStage;
         initWelcome();
+        initWinningStage();
         Parent root = FXMLLoader.load(getClass().getResource("../view/game.fxml"));
 
         mainScene = new Scene(root,900,600);
@@ -56,8 +58,34 @@ public class Main extends Application {
         getWelcomeStage().setScene(scene);
     }
 
+    public void initWinningStage() {
+        this.winningStage = new Stage();
+        Pane root = new Pane();
+
+        root.setPrefSize(900, 600);
+
+        getWelcomeStage().setTitle("The Maze Runner");
+        Image backGround = new Image ("/backgrounds/YouWin.jpg");
+        ImageView backGroundView = new ImageView(backGround);
+        backGroundView.setFitWidth(900);
+        backGroundView.setFitHeight(600);
+        Scene scene = new Scene(root);
+        root.getChildren().addAll(backGroundView, YouWinMenu.getInstance());
+        getWelcomeStage().setScene(scene);
+    }
+
+    public void goToWinningStage(){
+        this.primaryStage.hide();
+        this.welcomeStage.hide();
+        YouWinMenu.getInstance().resetScoreText();
+        this.getWinningStage().show();
+    }
+
     public Stage getWelcomeStage() {
         return welcomeStage;
     }
 
+    public Stage getWinningStage() {
+        return winningStage;
+    }
 }
