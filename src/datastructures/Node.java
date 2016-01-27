@@ -12,15 +12,15 @@ public class Node<T extends GameStage> {
     private List<Node<T>> children = new ArrayList<>();
     private Node<T> parent = null;
     private T data = null;
-    private int monsterID;
+    private int MonsterIndex;
     private boolean winFlag;
     private int GiftsIndex = (int) Math.floor(Math.random()*8);
     public Node(T data) {
         this.data = data;
         Collections.addAll(this.getChildren(), null, null, null, null);
     }
-    public Node(T data, Node<T> parent, int monsterID,boolean WinFlag) {
-        this.monsterID=monsterID;
+    public Node(T data, Node<T> parent, int MonsterIndex, boolean WinFlag) {
+        this.MonsterIndex = MonsterIndex;
         this.winFlag=winFlag;
         this.data = data;
         this.parent = parent;
@@ -37,7 +37,7 @@ public class Node<T extends GameStage> {
 
     public void addChild(T data, int index,int monsterID,boolean winFlag) {
         this.winFlag=winFlag;
-        this.monsterID=monsterID;
+        this.MonsterIndex =monsterID;
         Node<T> child = new Node<>(data);
         child.setParent(this);
         this.children.set(index, child);
@@ -60,7 +60,7 @@ public class Node<T extends GameStage> {
         }
     }
     public void addChild(Node<T> child,int monsterID,boolean winFlag) {
-        this.monsterID=monsterID;
+        this.MonsterIndex =monsterID;
         this.winFlag=winFlag;
         child.setParent(this);
         this.children.add(child);
@@ -90,8 +90,8 @@ public class Node<T extends GameStage> {
         this.parent = null;
     }
 
-    public int getmonsterID() {
-        return monsterID;
+    public int getMonsterIndex() {
+        return MonsterIndex;
     }
     public int getGiftsIndex(){return GiftsIndex;}
 }
