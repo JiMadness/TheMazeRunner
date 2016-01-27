@@ -42,6 +42,11 @@ public class Node<T extends GameStage> {
         child.setParent(this);
         this.children.set(index, child);
     }
+    public void addChild(T data, int index) {
+        Node<T> child = new Node<>(data);
+        child.setParent(this);
+        this.children.set(index, child);
+    }
 
     public void initialize() {
         switch (data.getParentCameFrom()) {

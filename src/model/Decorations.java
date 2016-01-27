@@ -25,5 +25,7 @@ public class Decorations {
         decorationsCanvas.getGraphicsContext2D().fillText("Ammo: "+ Pool.getAmmoLimit(),10,40);
 
         decorationsCanvas.getGraphicsContext2D().fillText("X: "+Player.getInstance().getPosX()+"\nY: "+Player.getInstance().getPosY(),10,60);
+       // decorationsCanvas.getGraphicsContext2D().fillText("Stage ID: "+ Maze.getCurrentNode().getData().getID(),10,100);
+
     }
 }
