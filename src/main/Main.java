@@ -31,6 +31,7 @@ public class Main extends Application {
         primaryStage.setTitle("The Maze Runner");
         primaryStage.setScene(mainScene);
         primaryStage.hide();
+        winningStage.hide();
         getWelcomeStage().show();
         Game.getInstance().initControls();
     }
@@ -65,13 +66,14 @@ public class Main extends Application {
         root.setPrefSize(900, 600);
 
         getWelcomeStage().setTitle("The Maze Runner");
-        Image backGround = new Image ("/backgrounds/YouWin.jpg");
+        Image backGround = new Image ("/backgrounds/You-Win.png");
         ImageView backGroundView = new ImageView(backGround);
         backGroundView.setFitWidth(900);
         backGroundView.setFitHeight(600);
         Scene scene = new Scene(root);
         root.getChildren().addAll(backGroundView, YouWinMenu.getInstance());
-        getWelcomeStage().setScene(scene);
+        winningStage.setScene(scene);
+
     }
 
     public void goToWinningStage(){

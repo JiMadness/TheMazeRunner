@@ -22,7 +22,7 @@ public class YouWinMenu extends StackPane {
         menu0.setTranslateX(325);
         menu0.setTranslateY(400);
 
-        btnScore = new MenuButton("Your Score: "+Integer.toString(Player.getInstance().getScore()));
+        btnScore = new MenuButton("Your Score: ");
 
         MenuButton btnResume = new MenuButton("Play Again");
         btnResume.setOnMouseClicked(event -> {
