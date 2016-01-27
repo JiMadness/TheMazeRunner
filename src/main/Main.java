@@ -1,32 +1,34 @@
 package main;
 
-import Monsters.Monster;
-import Monsters.MonsterType;
+import Menus.GameMenu;
 import controller.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 
 public class Main extends Application {
     private static Main instance;
     private Stage primaryStage;
+    private Stage welcomeStage;
     private Scene mainScene;
     @Override
     public void start(Stage primaryStage) throws Exception{
         instance=this;
         this.primaryStage=primaryStage;
-
+        initWelcome();
         Parent root = FXMLLoader.load(getClass().getResource("../view/game.fxml"));
 
         mainScene = new Scene(root,900,600);
         primaryStage.setTitle("The Maze Runner");
         primaryStage.setScene(mainScene);
-        primaryStage.show();
+        primaryStage.hide();
+        getWelcomeStage().show();
         Game.getInstance().initControls();
     }
 
@@ -35,5 +37,25 @@ public class Main extends Application {
     public Scene getMainScene(){return mainScene;}
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private void initWelcome(){
+        welcomeStage = new Stage();
+        Pane root = new Pane();
+
+        root.setPrefSize(800, 600);
+
+        getWelcomeStage().setTitle("The Maze Runner");
+        Image backGround = new Image ("/backgrounds/background.jpg");
+        ImageView backGroundView = new ImageView(backGround);
+        backGroundView.setFitWidth(800);
+        backGroundView.setFitHeight(600);
+        Scene scene = new Scene(root);
+        root.getChildren().addAll(backGroundView,GameMenu.getInstance());
+        getWelcomeStage().setScene(scene);
+    }
+
+    public Stage getWelcomeStage() {
+        return welcomeStage;
     }
 }
