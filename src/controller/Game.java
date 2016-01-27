@@ -3,6 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import main.Main;
@@ -17,8 +18,11 @@ public class Game{
     private StackPane layers;
     public Maze testMaze = new Maze(new ThreePathsStage(Path.NULL));
     public Image gameOverImage = new Image("/backgrounds/Gameover.jpg");
+    public ImageView gameOverImageView = new ImageView(gameOverImage);
     @FXML
     private void initialize(){
+        gameOverImageView.setFitWidth(900);
+        gameOverImageView.setFitHeight(600);
         instance= this;
         GameLoop.getInstance().start();
         testMaze.getMazeTree().getRoot().getData().start();

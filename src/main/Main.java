@@ -1,6 +1,7 @@
 package main;
 
 import Menus.GameMenu;
+import Menus.GameOverMenu;
 import controller.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -43,12 +44,12 @@ public class Main extends Application {
         welcomeStage = new Stage();
         Pane root = new Pane();
 
-        root.setPrefSize(800, 600);
+        root.setPrefSize(900, 600);
 
         getWelcomeStage().setTitle("The Maze Runner");
         Image backGround = new Image ("/backgrounds/background.jpg");
         ImageView backGroundView = new ImageView(backGround);
-        backGroundView.setFitWidth(800);
+        backGroundView.setFitWidth(900);
         backGroundView.setFitHeight(600);
         Scene scene = new Scene(root);
         root.getChildren().addAll(backGroundView,GameMenu.getInstance());
@@ -58,4 +59,5 @@ public class Main extends Application {
     public Stage getWelcomeStage() {
         return welcomeStage;
     }
+
 }

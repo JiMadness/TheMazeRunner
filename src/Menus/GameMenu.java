@@ -44,7 +44,7 @@ public class GameMenu extends Parent{
             });
         });
 
-        Rectangle bg = new Rectangle(800, 600);
+        Rectangle bg = new Rectangle(900, 600);
         bg.setFill(Color.GREY);
         bg.setOpacity(0.4);
         getChildren().addAll(bg, menu0);

@@ -1,8 +1,12 @@
 package Monsters;
 
+import Menus.GameOverMenu;
 import controller.Game;
+import main.Main;
 import model.Maze;
 import model.Player;
+
+import java.time.Duration;
 
 public class MovingDown_State implements MonsterState{
     Monster monster;
@@ -92,7 +96,10 @@ public class MovingDown_State implements MonsterState{
     @Override
     public void killPlayer() {
         Player.getInstance().setGameOver(true);
-        Game.getInstance().getFrame().getGraphicsContext2D().drawImage(Game.getInstance().gameOverImage, 0, 0, Game.getInstance().getFrame().getWidth(), Game.getInstance().getFrame().getHeight());
+
+        Game.getInstance().getLayers().getChildren().addAll(Game.getInstance().gameOverImageView);
+        Game.getInstance().getLayers().getChildren().addAll(GameOverMenu.getInstance());
+
         Player.getInstance().getUpSprite().hide();
         Player.getInstance().getLeftSprite().hide();
         Player.getInstance().getRightSprite().hide();
