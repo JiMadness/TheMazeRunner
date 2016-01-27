@@ -50,11 +50,10 @@ public class GameLoop extends AnimationTimer {
         if (Player.getInstance().getPosX() <= 0 && Maze.getCurrentNode().getChildren().get(Path.LEFT.ordinal()) != null) {
             Maze.getCurrentNode().getData().stop();
             getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
-
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
+            Maze.getCurrentNode().getMonster().switchFrame();
             Maze.setCurrentNode(Maze.getCurrentNode().getChildren().get(Path.LEFT.ordinal()));
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).plantInFrame();
+            Maze.getCurrentNode().getMonster().switchFrame();
+            Maze.getCurrentNode().getMonster().plantInFrame();
             Maze.getCurrentNode().getData().start();
             Player.getInstance().setPosX(Maze.getMaxX() - 1);
             getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Show();
@@ -62,35 +61,35 @@ public class GameLoop extends AnimationTimer {
         } else if (Player.getInstance().getPosX() >= 832 && Maze.getCurrentNode().getChildren().get(Path.RIGHT.ordinal()) != null) {
            getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
 
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
+            Maze.getCurrentNode().getMonster().switchFrame();
             Maze.getCurrentNode().getData().stop();
             Maze.setCurrentNode(Maze.getCurrentNode().getChildren().get(Path.RIGHT.ordinal()));
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).plantInFrame();
+            Maze.getCurrentNode().getMonster().switchFrame();
+            Maze.getCurrentNode().getMonster().plantInFrame();
             Maze.getCurrentNode().getData().start();
             Player.getInstance().setPosX(Maze.getMinX() + 1);
             getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Show();
 
         } else if (Player.getInstance().getPosY() >= 502 && Maze.getCurrentNode().getChildren().get(Path.DOWN.ordinal()) != null) {
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
+            Maze.getCurrentNode().getMonster().switchFrame();
            getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
 
             Maze.getCurrentNode().getData().stop();
             Maze.setCurrentNode(Maze.getCurrentNode().getChildren().get(Path.DOWN.ordinal()));
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).plantInFrame();
+            Maze.getCurrentNode().getMonster().switchFrame();
+            Maze.getCurrentNode().getMonster().plantInFrame();
             Maze.getCurrentNode().getData().start();
 
             Player.getInstance().setPosY(Maze.getMaxY() + 1);
             getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Show();
 
         } else if (Player.getInstance().getPosY() <= 108 && Maze.getCurrentNode().getChildren().get(Path.UP.ordinal()) != null) {
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
+            Maze.getCurrentNode().getMonster().switchFrame();
             getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
             Maze.getCurrentNode().getData().stop();
             Maze.setCurrentNode(Maze.getCurrentNode().getChildren().get(Path.UP.ordinal()));
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).switchFrame();
-            getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).plantInFrame();
+            Maze.getCurrentNode().getMonster().switchFrame();
+            Maze.getCurrentNode().getMonster().plantInFrame();
             Maze.getCurrentNode().getData().start();
             Player.getInstance().setPosY(Maze.getMinY() - 1);
             getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Show();
@@ -103,7 +102,7 @@ public class GameLoop extends AnimationTimer {
         Game.getInstance().makePlayerMovement();
         if (!gameTrack.isPlaying())
             gameTrack.play();
-        getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).update();
+        Maze.getCurrentNode().getMonster().update();
         Decorations.getInstance().updateDecorations();
         handleTransitions();
     }

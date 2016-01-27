@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import model.GameLoop;
 
 /**
  * Created by ehab on 1/27/2016.
@@ -76,16 +77,19 @@ public class GameMenu extends Parent{
 
         MenuButton btnLvl1 = new MenuButton("LEVEL 1");
         btnLvl1.setOnMouseClicked(event -> {
+            GameLoop.getInstance().reviveMonsters();
             main.Main.getInstance().getWelcomeStage().hide();
             main.Main.getInstance().getPrimaryStage().show();
         });
         MenuButton btnLvl2 = new MenuButton("LEVEL 2");
         btnLvl2.setOnMouseClicked(event -> {
+            GameLoop.getInstance().reviveMonsters();
             main.Main.getInstance().getWelcomeStage().hide();
             main.Main.getInstance().getPrimaryStage().show();
         });
         MenuButton btnLvl3 = new MenuButton("LEVEL 3");
         btnLvl3.setOnMouseClicked(event -> {
+            GameLoop.getInstance().reviveMonsters();
             main.Main.getInstance().getWelcomeStage().hide();
             main.Main.getInstance().getPrimaryStage().show();
         });

@@ -1,6 +1,8 @@
 package datastructures;
 
 
+import Monsters.Monster;
+import model.GameLoop;
 import model.GameStage;
 import model.Path;
 
@@ -20,8 +22,8 @@ public class Node<T extends GameStage> {
         Collections.addAll(this.getChildren(), null, null, null, null);
     }
     public Node(T data, Node<T> parent, int MonsterIndex, boolean WinFlag) {
-        this.MonsterIndex = MonsterIndex;
-        this.winFlag=winFlag;
+        this.setMonsterIndex(MonsterIndex);
+        this.setWinFlag(isWinFlag());
         this.data = data;
         this.parent = parent;
         Collections.addAll(this.getChildren(), null, null, null, null);
@@ -36,9 +38,10 @@ public class Node<T extends GameStage> {
     }
 
     public void addChild(T data, int index,int monsterID,boolean winFlag) {
-        this.winFlag=winFlag;
-        this.MonsterIndex =monsterID;
+
         Node<T> child = new Node<>(data);
+        child.setMonsterIndex(monsterID);
+        child.setWinFlag(winFlag);
         child.setParent(this);
         this.children.set(index, child);
     }
@@ -60,9 +63,9 @@ public class Node<T extends GameStage> {
         }
     }
     public void addChild(Node<T> child,int monsterID,boolean winFlag) {
-        this.MonsterIndex =monsterID;
-        this.winFlag=winFlag;
         child.setParent(this);
+        child.setMonsterIndex(monsterID);
+        child.setWinFlag(winFlag);
         this.children.add(child);
     }
 
@@ -94,4 +97,19 @@ public class Node<T extends GameStage> {
         return MonsterIndex;
     }
     public int getGiftsIndex(){return GiftsIndex;}
+    public Monster getMonster(){
+        return GameLoop.getInstance().getMonsters().get(getMonsterIndex());
+    }
+
+    public void setMonsterIndex(int monsterIndex) {
+        MonsterIndex = monsterIndex;
+    }
+
+    public boolean isWinFlag() {
+        return winFlag;
+    }
+
+    public void setWinFlag(boolean winFlag) {
+        this.winFlag = winFlag;
+    }
 }
