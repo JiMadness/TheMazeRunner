@@ -29,7 +29,7 @@ public class Game{
         testMaze.getMazeTree().getRoot().getData().start();
         Decorations.getInstance().updateDecorations();
 
-        testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.RIGHT),Path.RIGHT.ordinal(),1,false);
+        testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.RIGHT),Path.RIGHT.ordinal(),-1,false);
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.LEFT),Path.LEFT.ordinal(),5,false);
         testMaze.getMazeTree().getRoot().addChild(new NoPathStage(Path.UP),Path.UP.ordinal(),7,false);
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.DOWN),Path.DOWN.ordinal(),10,true);
