@@ -23,11 +23,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         instance=this;
         this.primaryStage=primaryStage;
+
         initWelcome();
         initWinningStage();
+
         Parent root = FXMLLoader.load(getClass().getResource("../view/game.fxml"));
 
         mainScene = new Scene(root,900,600);
+
         primaryStage.setTitle("The Maze Runner");
         primaryStage.setScene(mainScene);
         primaryStage.hide();
