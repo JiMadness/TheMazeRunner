@@ -6,6 +6,7 @@ import controller.Game;
 import graphics.AmmoGift;
 import graphics.Gifts;
 import graphics.ScoreGift;
+import graphics.WiningGift;
 import javafx.animation.AnimationTimer;
 import javafx.scene.media.AudioClip;
 
@@ -39,6 +40,7 @@ public class GameLoop extends AnimationTimer {
         gifts=new ArrayList<>();
         gifts.add(new ScoreGift());
         gifts.add(new ScoreGift());
+        gifts.add(new WiningGift());
         gifts.add(new ScoreGift());
         gifts.add(new ScoreGift());
         gifts.add(new AmmoGift());

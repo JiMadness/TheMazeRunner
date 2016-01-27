@@ -14,6 +14,7 @@ public class NoPathStage implements GameStage {
         Maze.setMaxY(265);
         Game.getInstance().getFrame().getGraphicsContext2D().drawImage(stageImage, 0, 0, Game.getInstance().getFrame().getWidth(), Game.getInstance().getFrame().getHeight());
         Maze.getCurrentNode().initialize();
+        Maze.getCurrentNode().GiftsIndex=8;
     }
     public NoPathStage(Path parentCameFrom){
         this.parentCameFrom = parentCameFrom;
