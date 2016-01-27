@@ -162,4 +162,10 @@ public class GameLoop extends AnimationTimer {
             x.Revive();
         }
     }
+    public void resetMaze(){
+        Maze.getCurrentNode().getData().stop();
+        Maze.setCurrentNode(Game.getInstance().testMaze.getMazeTree().getRoot());
+        getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
+        Maze.getCurrentNode().getData().start();
+    }
 }

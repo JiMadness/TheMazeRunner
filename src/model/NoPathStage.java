@@ -8,9 +8,9 @@ public class NoPathStage implements GameStage {
     private Path parentCameFrom;
     private static Image stageImage = new Image("design/nopath1.jpg");
     public void start(){
-        Maze.setMinX(0);
+        Maze.setMinX(Maze.getXPath()-Maze.getDelta());
         Maze.setMinY(502);
-        Maze.setMaxX(832);
+        Maze.setMaxX(Maze.getXPath()+Maze.getDelta());
         Maze.setMaxY(265);
         Game.getInstance().getFrame().getGraphicsContext2D().drawImage(stageImage, 0, 0, Game.getInstance().getFrame().getWidth(), Game.getInstance().getFrame().getHeight());
         Maze.getCurrentNode().initialize();

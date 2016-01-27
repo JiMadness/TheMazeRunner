@@ -20,7 +20,7 @@ public class OutOfFrame_State implements MonsterState{
 
     @Override
     public void move() {
-
+        this.monster.getMonsterSprite().hide();
     }
 
     @Override

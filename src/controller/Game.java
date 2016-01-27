@@ -16,7 +16,6 @@ public class Game{
     private Canvas frame;
     @FXML
     private StackPane layers;
-    public Maze testMaze1 = new Maze(new ThreePathsStage(Path.NULL));
     public Maze testMaze = new Maze(new ThreePathsStage(Path.NULL));
     public Image gameOverImage = new Image("/backgrounds/Gameover.jpg");
     public ImageView gameOverImageView = new ImageView(gameOverImage);
@@ -28,6 +27,8 @@ public class Game{
         GameLoop.getInstance().start();
         testMaze.getMazeTree().getRoot().getData().start();
         Decorations.getInstance().updateDecorations();
+        testMaze.getMazeTree().getRoot().setWinFlag(false);
+        testMaze.getMazeTree().getRoot().setMonsterIndex(-1);
 
         testMaze.getMazeTree().getRoot().addChild(new RightPathStage(Path.RIGHT),Path.RIGHT.ordinal(),-1,false);
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.LEFT),Path.LEFT.ordinal(),5,false);
