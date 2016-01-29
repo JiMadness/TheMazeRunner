@@ -24,20 +24,6 @@ public class GameLoop extends AnimationTimer {
     }
 
     private GameLoop() {
-        setMonsters(new ArrayList<>());
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
-        getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
-        getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
-        getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
-        getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
-
-
 
         gifts=new ArrayList<>();
         gifts.add(new ScoreGift());
@@ -167,5 +153,8 @@ public class GameLoop extends AnimationTimer {
         Maze.setCurrentNode(Game.getInstance().testMaze.getMazeTree().getRoot());
         getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
         Maze.getCurrentNode().getData().start();
+    }
+    public double getDeltaDisplacement(){
+        return 0.25;
     }
 }

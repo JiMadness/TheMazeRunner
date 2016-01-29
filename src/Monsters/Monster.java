@@ -2,6 +2,7 @@ package Monsters;
 
 import graphics.Sprite;
 import javafx.scene.image.Image;
+import model.GameLoop;
 import model.Maze;
 import model.Player;
 
@@ -16,7 +17,10 @@ public class Monster implements MonsterState{
     MonsterState inFrame_State;
     MonsterState outOfFrame_State;
 
-    MonsterState state = dead_State;
+    MonsterState state;
+
+    double deltaDisplacement;
+    int Speed;
     boolean doingTurn;
     private Sprite monsterSprite;
     private double posX=200;
@@ -33,14 +37,17 @@ public class Monster implements MonsterState{
             case CHROME:
                 sprite.add(new Image("sprites/character/ChromeMonster.png"));
                 lives = 1;
+                Speed = 8;
                 break;
             case FIREFOX:
                 sprite.add(new Image("sprites/character/FireFoxMonster.png"));
                 lives = 2;
+                Speed = 6;
                 break;
             case EXPLORER:
                 sprite.add(new Image("sprites/character/IEMonster.png"));
                 lives = 3;
+                Speed = 5;
                 break;
         }
         this.monsterSprite = new Sprite(sprite, getPosX(), getPosY(), getRefreshTime());
@@ -53,6 +60,7 @@ public class Monster implements MonsterState{
         inFrame_State = new InFrame_State(this);
         outOfFrame_State = new OutOfFrame_State(this);
         this.state = outOfFrame_State;
+        deltaDisplacement = GameLoop.getInstance().getDeltaDisplacement();
     }
 
     @Override
@@ -112,20 +120,20 @@ public class Monster implements MonsterState{
 
 
     public void moveUp(){
-        setPosY(getPosY() - 1);
+        setPosY(getPosY() - deltaDisplacement);
         movingDirection = Moving.UP;
     }
     public void moveDown(){
-            setPosY(getPosY() + 1);
+            setPosY(getPosY() + deltaDisplacement);
             movingDirection = Moving.DOWN;
     }
     public void moveLeft(){
-            setPosX(getPosX() - 1);
+            setPosX(getPosX() - deltaDisplacement);
             movingDirection = Moving.LEFT;
     }
 
     public void moveRight(){
-        setPosX(getPosX() + 1);
+        setPosX(getPosX() + deltaDisplacement);
         movingDirection = Moving.RIGHT;
     }
     public void update(){
@@ -146,10 +154,14 @@ public class Monster implements MonsterState{
         }
         System.err.println();
         */
+        if(state == dead_State) return;
+        if(state == outOfFrame_State) return;
 
-        this.state.MakeDecision();
-        this.state.move();
-        this.monsterSprite.updatePosition(getPosX(), getApparentY());
+        for(int i = 0; i<= this.Speed; i++) {
+            this.state.MakeDecision();
+            this.state.move();
+            this.monsterSprite.updatePosition(getPosX(), getApparentY());
+        }
     }
 
     public double getPosX() {

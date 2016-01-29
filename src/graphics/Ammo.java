@@ -138,10 +138,12 @@ public class Ammo extends AnimationTimer {
         }
     }
     public boolean checkInMonsterRange(){
+        if((Maze.getCurrentNode().getMonsterIndex()>-1)&&(Maze.getCurrentNode().getMonsterIndex() < GameLoop.getInstance().getMonsters().size()))
         return (this.posX < GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosX() + 30)
                 && (this.posX > GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosX() - 30)
                 && (this.posY > GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosY() - 30)
                 && (this.posY < GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosY() + 30);
+        return false;
     }
 
     public void updatePosition(double newX, double newY) {

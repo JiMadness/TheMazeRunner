@@ -1,5 +1,7 @@
 package controller;
 
+import Monsters.Monster;
+import Monsters.MonsterType;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -8,6 +10,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import main.Main;
 import model.*;
+
+import java.util.ArrayList;
 
 
 public class Game{
@@ -34,6 +38,18 @@ public class Game{
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.LEFT),Path.LEFT.ordinal(),5,false);
         testMaze.getMazeTree().getRoot().addChild(new NoPathStage(Path.UP),Path.UP.ordinal(),7,false);
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.DOWN),Path.DOWN.ordinal(),10,true);
+        GameLoop.getInstance().setMonsters(new ArrayList<>());
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
+        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
     }
     public void initControls(){
         Main.getInstance().getMainScene().setOnKeyPressed(e -> {

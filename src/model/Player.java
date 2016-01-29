@@ -23,6 +23,9 @@ public class Player {
     public enum Moving{UP,DOWN,LEFT,RIGHT}
     private static Player instance = new Player();
 
+    int Speed;
+    double deltaDisplacement;
+
     private Sprite upSprite;
     private Sprite downSprite;
     private Sprite leftSprite;
@@ -33,7 +36,7 @@ public class Player {
     private AudioClip noAmmo = new AudioClip(new File("resources/sounds/noAmmo.wav").toURI().toString());
     private double posX=Maze.getXPath();
     private double posY=Maze.getYPath();
-    private double refreshTime = 100;
+    private double refreshTime = 50;
     private int score=0;
     private int ammo=10;
     private boolean gameOver;
@@ -42,6 +45,9 @@ public class Player {
     }
 
     private Player() {
+        Speed = 10;
+        deltaDisplacement = GameLoop.getInstance().getDeltaDisplacement();
+
         ArrayList<Image> Ammos = new ArrayList<>();
         Ammos.add(new Image("Ammo/bom.png"));
         Ammos.add(new Image("Ammo/ball.png"));
@@ -91,80 +97,91 @@ public class Player {
     }
     public void moveUp(){
         if(isGameOver()) return;
-        if(getPosY()<Maze.getMaxY())
-            return;
-        if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
-            getDownSprite().hide();
-            getLeftSprite().hide();
-            getRightSprite().hide();
-            setPosY(getPosY() - 2);
-            getUpSprite().show();
-            if(checkInGiftRange()){
-                if(!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()){
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();}
+        for(int i=0; i<= Speed; i++) {
+            if (getPosY() < Maze.getMaxY())
+                return;
+            if (getPosX() > Maze.getXPath() - Maze.getDelta() && getPosX() < Maze.getXPath() + Maze.getDelta()) {
+                getDownSprite().hide();
+                getLeftSprite().hide();
+                getRightSprite().hide();
+                setPosY(getPosY() - deltaDisplacement);
+                getUpSprite().show();
+                if (checkInGiftRange()) {
+                    if (!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()) {
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
+                    }
+                }
+                movingDirection = Moving.UP;
             }
-            movingDirection = Moving.UP;
         }
     }
     public void moveDown(){
         if(gameOver) return;
-        if(getPosY()>Maze.getMinY())
-            return;
-        if(getPosX()>Maze.getXPath()-Maze.getDelta()&&getPosX()<Maze.getXPath()+Maze.getDelta()) {
-            getUpSprite().hide();
-            getLeftSprite().hide();
-            getRightSprite().hide();
-            setPosY(getPosY() + 2);
-            getDownSprite().show();
-            if(checkInGiftRange()){
-                if(!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()){
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();}
+        for(int i=0; i<= Speed; i++) {
+            if (getPosY() > Maze.getMinY())
+                return;
+            if (getPosX() > Maze.getXPath() - Maze.getDelta() && getPosX() < Maze.getXPath() + Maze.getDelta()) {
+                getUpSprite().hide();
+                getLeftSprite().hide();
+                getRightSprite().hide();
+                setPosY(getPosY() + deltaDisplacement);
+                getDownSprite().show();
+                if (checkInGiftRange()) {
+                    if (!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()) {
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
+                    }
+                }
+                movingDirection = Moving.DOWN;
             }
-            movingDirection = Moving.DOWN;
         }
     }
     public void moveLeft(){
         if(isGameOver()) return;
+        for(int i=0; i<= Speed; i++) {
+            if (getPosX() < Maze.getMinX())
+                return;
+            if (getPosY() > Maze.getYPath() - Maze.getDelta() && getPosY() < Maze.getYPath() + Maze.getDelta()) {
+                getUpSprite().hide();
+                getDownSprite().hide();
+                getRightSprite().hide();
+                setPosX(getPosX() - deltaDisplacement);
+                getLeftSprite().show();
+                if (checkInGiftRange()) {
+                    if (!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()) {
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
 
-        if(getPosX()<Maze.getMinX())
-            return;
-        if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
-            getUpSprite().hide();
-            getDownSprite().hide();
-            getRightSprite().hide();
-            setPosX(getPosX() - 2);
-            getLeftSprite().show();
-            if(checkInGiftRange()){
-                if(!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()){
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
-
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();}
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
+                    }
+                }
+                movingDirection = Moving.LEFT;
             }
-            movingDirection = Moving.LEFT;
         }
     }
     public void moveRight(){
         if(isGameOver()) return;
-        if(getPosX()>Maze.getMaxX())
-            return;
-        if(getPosY()>Maze.getYPath()-Maze.getDelta()&&getPosY()<Maze.getYPath()+Maze.getDelta()) {
-            getUpSprite().hide();
-            getDownSprite().hide();
-            getLeftSprite().hide();
-            setPosX(getPosX() + 2);
-            getRightSprite().show();
-            if(checkInGiftRange()){
-                if(!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()){
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
-                    GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();}
+        for(int i=0; i<= Speed; i++) {
+            if (getPosX() > Maze.getMaxX())
+                return;
+            if (getPosY() > Maze.getYPath() - Maze.getDelta() && getPosY() < Maze.getYPath() + Maze.getDelta()) {
+                getUpSprite().hide();
+                getDownSprite().hide();
+                getLeftSprite().hide();
+                setPosX(getPosX() + deltaDisplacement);
+                getRightSprite().show();
+                if (checkInGiftRange()) {
+                    if (!GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).isHidden()) {
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).AddBonus();
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).setTaken(true);
+                        GameLoop.getGifts().get(Maze.getCurrentNode().getGiftsIndex()).Hide();
+                    }
+                }
+                movingDirection = Moving.RIGHT;
             }
-            movingDirection = Moving.RIGHT;
         }
     }
     public void shoot(){
