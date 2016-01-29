@@ -45,7 +45,7 @@ public class Player {
     }
 
     private Player() {
-        Speed = 10;
+        Speed = 100;
         deltaDisplacement = GameLoop.getInstance().getDeltaDisplacement();
 
         ArrayList<Image> Ammos = new ArrayList<>();

@@ -37,7 +37,7 @@ public class Monster implements MonsterState{
             case CHROME:
                 sprite.add(new Image("sprites/character/ChromeMonster.png"));
                 lives = 1;
-                Speed = 8;
+                Speed = 50;
                 break;
             case FIREFOX:
                 sprite.add(new Image("sprites/character/FireFoxMonster.png"));

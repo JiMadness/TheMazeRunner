@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class Game{
     private static Game instance;
+    private ArrayList<Monster> monsters;
     @FXML
     private Canvas frame;
     @FXML
@@ -23,6 +24,15 @@ public class Game{
     public Maze testMaze = new Maze(new ThreePathsStage(Path.NULL));
     public Image gameOverImage = new Image("/backgrounds/Gameover.jpg");
     public ImageView gameOverImageView = new ImageView(gameOverImage);
+
+    public  ArrayList<Monster> getMonsters() {
+        return monsters;
+    }
+
+    public  void setMonsters(ArrayList<Monster> monsters) {
+        this.monsters = monsters;
+    }
+
     @FXML
     private void initialize(){
         gameOverImageView.setFitWidth(900);
@@ -38,18 +48,18 @@ public class Game{
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.LEFT),Path.LEFT.ordinal(),5,false);
         testMaze.getMazeTree().getRoot().addChild(new NoPathStage(Path.UP),Path.UP.ordinal(),7,false);
         testMaze.getMazeTree().getRoot().addChild(new LeftPathStage(Path.DOWN),Path.DOWN.ordinal(),10,true);
-        GameLoop.getInstance().setMonsters(new ArrayList<>());
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
-        GameLoop.getInstance().getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
+        setMonsters(new ArrayList<>());
+        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        getMonsters().add(Monster.makeMonster(MonsterType.CHROME));
+        getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
+        getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
+        getMonsters().add(Monster.makeMonster(MonsterType.FIREFOX));
+        getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
+        getMonsters().add(Monster.makeMonster(MonsterType.EXPLORER));
     }
     public void initControls(){
         Main.getInstance().getMainScene().setOnKeyPressed(e -> {
@@ -79,5 +89,6 @@ public class Game{
     public static Game getInstance(){return instance;}
     public Canvas getFrame(){return frame;}
     public StackPane getLayers(){return layers;}
+
 
 }

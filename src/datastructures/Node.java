@@ -2,6 +2,7 @@ package datastructures;
 
 
 import Monsters.Monster;
+import controller.Game;
 import model.GameLoop;
 import model.GameStage;
 import model.Path;
@@ -103,7 +104,7 @@ public class Node<T extends GameStage> {
     }
     public int getGiftsIndex(){return GiftsIndex;}
     public Monster getMonster(){
-        return GameLoop.getInstance().getMonsters().get(getMonsterIndex());
+        return Game.getInstance().getMonsters().get(getMonsterIndex());
     }
 
     public void setMonsterIndex(int monsterIndex) {

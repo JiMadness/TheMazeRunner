@@ -52,7 +52,7 @@ public class Ammo extends AnimationTimer {
                 }
                 else if(checkInMonsterRange()){
                     AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
-                    GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
+                    Game.getInstance().getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
                     Player.getInstance().setScore(Player.getInstance().getScore()+5);
 
                     max = true;
@@ -77,7 +77,7 @@ public class Ammo extends AnimationTimer {
                 }
                 else if(checkInMonsterRange()){
                     AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
-                    GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
+                    Game.getInstance().getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
                     Player.getInstance().setScore(Player.getInstance().getScore()+5);
                     max = true;
                 }
@@ -101,7 +101,7 @@ public class Ammo extends AnimationTimer {
                 }
                 else if(checkInMonsterRange()){
                     AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
-                    GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
+                    Game.getInstance().getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
                     Player.getInstance().setScore(Player.getInstance().getScore()+5);
 
                     max = true;
@@ -124,7 +124,7 @@ public class Ammo extends AnimationTimer {
                 }
                 else if(checkInMonsterRange()){
                     AmmoCanvas.getGraphicsContext2D().drawImage(boom, posX, posY);
-                    GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
+                    Game.getInstance().getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).collide();
                     Player.getInstance().setScore(Player.getInstance().getScore()+5);
 
                     max = true;
@@ -138,11 +138,11 @@ public class Ammo extends AnimationTimer {
         }
     }
     public boolean checkInMonsterRange(){
-        if((Maze.getCurrentNode().getMonsterIndex()>-1)&&(Maze.getCurrentNode().getMonsterIndex() < GameLoop.getInstance().getMonsters().size()))
-        return (this.posX < GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosX() + 30)
-                && (this.posX > GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosX() - 30)
-                && (this.posY > GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosY() - 30)
-                && (this.posY < GameLoop.getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosY() + 30);
+        if((Maze.getCurrentNode().getMonsterIndex()>-1)&&(Maze.getCurrentNode().getMonsterIndex() < Game.getInstance().getMonsters().size()))
+        return (this.posX < Game.getInstance().getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosX() + 30)
+                && (this.posX > Game.getInstance().getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosX() - 30)
+                && (this.posY > Game.getInstance().getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosY() - 30)
+                && (this.posY < Game.getInstance().getMonsters().get(Maze.getCurrentNode().getMonsterIndex()).getPosY() + 30);
         return false;
     }
 
